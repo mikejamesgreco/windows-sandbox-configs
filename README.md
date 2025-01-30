@@ -12,6 +12,7 @@ This repository contains various **Windows Sandbox configurations** (`.wsb` file
 | Sandbox Name           | Description |
 |------------------------|-------------|
 | **`base/`**           | A minimal sandbox with no extra configurations. |
+| **`java-minimal/`**           | A minimal sandbox with 7zip, git, jdk, eclipse. |
 
 ## 🚀 Getting Started
 ### **Prerequisites**
