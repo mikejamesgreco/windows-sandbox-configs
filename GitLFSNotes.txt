@@ -1,0 +1,8 @@
+Steps to enable large file storage in GIT:
+
+repo> git lfs install
+
+repo> git lfs track "base/installers/*.zip"
+
+repo> git lfs track "java-minimal/installers/*.zip"
+
