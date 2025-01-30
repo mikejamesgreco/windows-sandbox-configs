@@ -1,0 +1,15 @@
+# Ignore all files inside logs and data subfolders
+
+base/logs/*
+java-minimal/logs/*
+
+base/data/*
+java-minimal/data/*
+
+# Keep the .gitkeepifempty files
+
+!base/data/.gitkeepifempty
+!java-minimal/data/.gitkeepifempty
+
+!base/logs/.gitkeepifempty
+!java-minimal/logs/.gitkeepifempty
