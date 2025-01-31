@@ -1,8 +1,14 @@
 Steps to enable large file storage in GIT:
+Check usage at Settings → Billing → LFS Usage
 
-repo> git lfs install
+  repo> git lfs install (install git lfs)
 
-repo> git lfs track "base/installers/*.zip"
+  repo> git lfs track "base/installers/*.zip" (add entry into .gitattributes)
 
-repo> git lfs track "java-minimal/installers/*.zip"
+  repo> git lfs track "java-minimal/installers/*.zip" (add entry into .gitattributes)
+
+  repo> git lfs ls-files (list files in LFS)
+
+  repo> git lfs ls-files --size (list files in LFS plus size)
+
 
