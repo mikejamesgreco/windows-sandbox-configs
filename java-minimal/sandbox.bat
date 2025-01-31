@@ -7,6 +7,8 @@ REM *********************************************
 @echo off
 setlocal enabledelayedexpansion
 
+cd C:\>nul 2>&1
+
 REM Safety check in case someone bumps the .bat file
 set SAFE=%1
 if "%SAFE%"=="" (
@@ -53,8 +55,11 @@ REM *********************************************
   set INSTALLERS_DIR=%SANDBOX_DIR%\installers
   set CONFIG_FILE=%CONFIGS_DIR%\sandbox.properties
   set LOGFILE=%SANDBOX_DIR%\logs\sandbox.log
+  mkdir C:\Development
+  set DEVDIR=C:\Development
 
   del %LOGFILE% > nul 2>&1 
+  call :log "Starting"
 
   start powershell -NoExit -Command "Get-Content -Path '%LOGFILE%' -Wait"
 
@@ -64,9 +69,6 @@ REM *********************************************
   call :log "CONFIG_FILE=%CONFIG_FILE%"
   call :log "DEVDIR=%DEVDIR%"
   call :log "LOGFILE=%LOGFILE%"
-
-  mkdir C:\Development
-  set DEVDIR=C:\Development
 
 exit /b
 
@@ -116,6 +118,9 @@ REM *********************************************
   call :log "Calling install_winget.bat"
   start /min /wait cmd /c "%INSTALLERS_DIR%\install_winget.bat %SANDBOX_DIR%\logs\install_winget.log >> %LOGFILE% 2>&1"
 
+  REM Reset msstore source (only if needed)
+  winget source reset --name msstore > nul
+
   REM Install 7zip using winget
   call :log "Installing 7zip"
   winget install -e --id 7zip.7zip -h --accept-source-agreements --silent > nul 2>&1
@@ -130,51 +135,43 @@ REM *********************************************
   call :log "Installing Git"
   winget install -e --id Git.Git -h --scope machine --accept-source-agreements --silent > nul 2>&1
   if %errorlevel% neq 0 call :log "Git installation failed with error code %errorlevel%"
+  set PATH=%PATH%;"C:\Program Files\Git\bin"
+  setx PATH %PATH%;"C:\Program Files\Git\bin" /m
+
+  REM Install Notepad++
+  call :log "Installing Notepad++"
+  winget install -e --id Notepad++.Notepad++ -h --scope machine --accept-source-agreements --silent > nul 2>&1
+  if %errorlevel% neq 0 call :log "Notepad++ installation failed with error code %errorlevel%"
 
   REM Install Eclipse with Lombok
-  call :log "Installing Eclipse (jee-2024-09-R-win32-x86_64)"
-  copy "%SANDBOX_DIR%\installers\eclipse-jee-2024-09-R-win32-x86_64.zip" %DEVDIR%
-  "C:\Program Files\7-Zip\7z.exe" x "%DEVDIR%\eclipse-jee-2024-09-R-win32-x86_64.zip" -o"%DEVDIR%\eclipse-jee-2024-09-R-win32-x86_64" -y > nul 2>&1
+  call :log "Installing Eclipse (jee-2024-12-R-win32-x86_64)"
+  copy "%INSTALLERS_DIR%\eclipse-jee-2024-12-R-win32-x86_64.zip" %DEVDIR%
+  "C:\Program Files\7-Zip\7z.exe" x "%DEVDIR%\eclipse-jee-2024-12-R-win32-x86_64.zip" -o"%DEVDIR%\eclipse-jee-2024-12-R-win32-x86_64" -y > nul 2>&1
   if %errorlevel% neq 0 call :log "Eclipse installation failed with error code %errorlevel%"
   
   REM Download and install lombok jar
   call :log "Installing Lombok"
-  curl -L -o "%DEVDIR%\eclipse-jee-2024-09-R-win32-x86_64\eclipse\lombok.jar" "https://projectlombok.org/downloads/lombok.jar"
+  curl -L -o "%DEVDIR%\eclipse-jee-2024-12-R-win32-x86_64\eclipse\lombok.jar" "https://projectlombok.org/downloads/lombok.jar"
   if %errorlevel% neq 0 call :log "Lombok.jar download failed with error code %errorlevel%"
-  echo -javaagent:%DEVDIR%\eclipse-jee-2024-09-R-win32-x86_64\eclipse\lombok.jar >> "%DEVDIR%\eclipse-jee-2024-09-R-win32-x86_64\eclipse\eclipse.ini"
+  echo -javaagent:%DEVDIR%\eclipse-jee-2024-12-R-win32-x86_64\eclipse\lombok.jar >> "%DEVDIR%\eclipse-jee-2024-12-R-win32-x86_64\eclipse\eclipse.ini"
 
   REM Desktop shortcuts
 
   REM Shortcut for 7-Zip
-  echo [%date% %time%] Creating shortcut for 7zip >> %LOGFILE%
-  echo Set oWS = WScript.CreateObject("WScript.Shell") > CreateShortcut.vbs
-  echo sLinkFile = oWS.SpecialFolders("Desktop") ^& "\\7-Zip.lnk" >> CreateShortcut.vbs
-  echo Set oLink = oWS.CreateShortcut(sLinkFile) >> CreateShortcut.vbs
-  echo oLink.TargetPath = "C:\Program Files\7-Zip\7zFM.exe" >> CreateShortcut.vbs
-  echo oLink.Save >> CreateShortcut.vbs
-  cscript //nologo CreateShortcut.vbs
-  del CreateShortcut.vbs
+  call :log "Creating shortcut for 7zip"
+  powershell -ExecutionPolicy Bypass -File "%INSTALLERS_DIR%\create_desktop_shortcut.ps1" -ShortcutName "7-Zip" -TargetPath "C:\Program Files\7-Zip\7zFM.exe"
 
   REM Shortcut for Git Bash
-  echo [%date% %time%] Creating shortcut for Git Bash >> %LOGFILE%
-  echo Set oWS = WScript.CreateObject("WScript.Shell") > CreateShortcut.vbs
-  echo sLinkFile = oWS.SpecialFolders("Desktop") ^& "\\Git Bash.lnk" >> CreateShortcut.vbs
-  echo Set oLink = oWS.CreateShortcut(sLinkFile) >> CreateShortcut.vbs
-  echo oLink.TargetPath = "C:\Program Files\Git\git-bash.exe" >> CreateShortcut.vbs
-  echo oLink.Save >> CreateShortcut.vbs
-  cscript //nologo CreateShortcut.vbs
-  del CreateShortcut.vbs
+  call :log "Creating shortcut for Git Bash"
+  powershell -ExecutionPolicy Bypass -File "%INSTALLERS_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Git Bash" -TargetPath "C:\Program Files\Git\git-bash.exe"
 
-  REM Shortcut for Eclipse
-  echo [%date% %time%] Creating shortcut for Eclipse >> %LOGFILE%
-  echo Set oWS = WScript.CreateObject("WScript.Shell") > CreateShortcut.vbs
-  echo sLinkFile = oWS.SpecialFolders("Desktop") ^& "\\Eclipse.lnk" >> CreateShortcut.vbs
-  echo Set oLink = oWS.CreateShortcut(sLinkFile) >> CreateShortcut.vbs
-  echo oLink.TargetPath = "C:\Development\eclipse-jee-2024-09-R-win32-x86_64\eclipse\eclipse.exe" >> CreateShortcut.vbs
-  echo oLink.WorkingDirectory = "C:\Development\eclipse-jee-2024-09-R-win32-x86_64\eclipse" >> CreateShortcut.vbs
-  echo oLink.Save >> CreateShortcut.vbs
-  cscript //nologo CreateShortcut.vbs
-  del CreateShortcut.vbs
+  REM Shortcut for Git Bash
+  call :log "Creating shortcut for Git Bash"
+  powershell -ExecutionPolicy Bypass -File "%INSTALLERS_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Notepad++" -TargetPath "C:\Program Files\Notepad++\notepad++.exe"
+
+  REM Shortcut for Git Bash
+  call :log "Creating shortcut for Eclipse"
+  powershell -ExecutionPolicy Bypass -File "%INSTALLERS_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Eclipse" -TargetPath "C:\Development\eclipse-jee-2024-12-R-win32-x86_64\eclipse\eclipse.exe" -WorkingDirectory "C:\Development\eclipse-jee-2024-09-R-win32-x86_64\eclipse"
 
 exit /b
 

@@ -112,6 +112,9 @@ REM *********************************************
   call :log "Calling install_winget.bat"
   start /min /wait cmd /c "%INSTALLERS_DIR%\install_winget.bat %SANDBOX_DIR%\logs\install_winget.log >> %LOGFILE% 2>&1"
 
+  REM Reset msstore source (only if needed)
+  winget source reset --name msstore > nul
+
   REM Install 7zip using winget
   call :log "Installing 7zip"
   winget install -e --id 7zip.7zip -h --accept-source-agreements --silent > nul 2>&1
