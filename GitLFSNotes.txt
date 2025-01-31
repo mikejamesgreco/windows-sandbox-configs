@@ -3,7 +3,9 @@ Check usage at Settings → Billing → LFS Usage
 
   repo> git lfs install (install git lfs)
 
-  repo> git lfs track "base/installers/*.zip" (add entry into .gitattributes)
+  repo> git lfs track "common/*.zip" (add entry into .gitattributes)
+
+  repo> git lfs track "java-minimal/installers/*.zip" (add entry into .gitattributes)
 
   repo> git lfs track "java-minimal/installers/*.zip" (add entry into .gitattributes)
 

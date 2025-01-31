@@ -51,6 +51,7 @@ REM *********************************************
 :init_environment
 
   set SANDBOX_DIR=c:\sandbox
+  set COMMON_DIR=c:\common
   set CONFIGS_DIR=%SANDBOX_DIR%\configs
   set INSTALLERS_DIR=%SANDBOX_DIR%\installers
   set CONFIG_FILE=%CONFIGS_DIR%\sandbox.properties
@@ -116,7 +117,7 @@ REM *********************************************
 
   REM Install WinGet
   call :log "Calling install_winget.bat"
-  start /min /wait cmd /c "%INSTALLERS_DIR%\install_winget.bat %SANDBOX_DIR%\logs\install_winget.log >> %LOGFILE% 2>&1"
+  start /min /wait cmd /c "%COMMON_DIR%\install_winget.bat %SANDBOX_DIR%\logs\install_winget.log >> %LOGFILE% 2>&1"
 
   REM Reset msstore source (only if needed)
   winget source reset --name msstore > nul
@@ -145,7 +146,7 @@ REM *********************************************
 
   REM Install Eclipse with Lombok
   call :log "Installing Eclipse (jee-2024-12-R-win32-x86_64)"
-  copy "%INSTALLERS_DIR%\eclipse-jee-2024-12-R-win32-x86_64.zip" %DEVDIR%
+  copy "%COMMON_DIR%\eclipse-jee-2024-12-R-win32-x86_64.zip" %DEVDIR%
   "C:\Program Files\7-Zip\7z.exe" x "%DEVDIR%\eclipse-jee-2024-12-R-win32-x86_64.zip" -o"%DEVDIR%\eclipse-jee-2024-12-R-win32-x86_64" -y > nul 2>&1
   if %errorlevel% neq 0 call :log "Eclipse installation failed with error code %errorlevel%"
   
@@ -159,19 +160,19 @@ REM *********************************************
 
   REM Shortcut for 7-Zip
   call :log "Creating shortcut for 7zip"
-  powershell -ExecutionPolicy Bypass -File "%INSTALLERS_DIR%\create_desktop_shortcut.ps1" -ShortcutName "7-Zip" -TargetPath "C:\Program Files\7-Zip\7zFM.exe"
+  powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "7-Zip" -TargetPath "C:\Program Files\7-Zip\7zFM.exe"
 
   REM Shortcut for Git Bash
   call :log "Creating shortcut for Git Bash"
-  powershell -ExecutionPolicy Bypass -File "%INSTALLERS_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Git Bash" -TargetPath "C:\Program Files\Git\git-bash.exe"
+  powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Git Bash" -TargetPath "C:\Program Files\Git\git-bash.exe"
 
-  REM Shortcut for Git Bash
-  call :log "Creating shortcut for Git Bash"
-  powershell -ExecutionPolicy Bypass -File "%INSTALLERS_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Notepad++" -TargetPath "C:\Program Files\Notepad++\notepad++.exe"
+  REM Shortcut for Notepad++
+  call :log "Creating shortcut for Notepad++"
+  powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Notepad++" -TargetPath "C:\Program Files\Notepad++\notepad++.exe"
 
   REM Shortcut for Git Bash
   call :log "Creating shortcut for Eclipse"
-  powershell -ExecutionPolicy Bypass -File "%INSTALLERS_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Eclipse" -TargetPath "C:\Development\eclipse-jee-2024-12-R-win32-x86_64\eclipse\eclipse.exe" -WorkingDirectory "C:\Development\eclipse-jee-2024-09-R-win32-x86_64\eclipse"
+  powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Eclipse" -TargetPath "C:\Development\eclipse-jee-2024-12-R-win32-x86_64\eclipse\eclipse.exe" -WorkingDirectory "C:\Development\eclipse-jee-2024-09-R-win32-x86_64\eclipse"
 
 exit /b
 

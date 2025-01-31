@@ -7,6 +7,8 @@ REM *********************************************
 @echo off
 setlocal enabledelayedexpansion
 
+cd C:\>nul 2>&1
+
 REM Safety check in case someone bumps the .bat file
 set SAFE=%1
 if "%SAFE%"=="" (
@@ -48,7 +50,8 @@ REM *********************************************
 
 :init_environment
 
-  set SANDBOX_DIR=c:\sandbox
+  set SANDBOX_DIR=C:\sandbox
+  set COMMON_DIR=C:\common
   set CONFIGS_DIR=%SANDBOX_DIR%\configs
   set INSTALLERS_DIR=%SANDBOX_DIR%\installers
   set CONFIG_FILE=%CONFIGS_DIR%\sandbox.properties
@@ -59,6 +62,7 @@ REM *********************************************
   start powershell -NoExit -Command "Get-Content -Path '%LOGFILE%' -Wait"
 
   call :log "SANDBOX_DIR=%SANDBOX_DIR%"
+  call :log "COMMON_DIR=%COMMON_DIR%"
   call :log "CONFIGS_DIR=%CONFIGS_DIR%"
   call :log "INSTALLERS_DIR=%INSTALLERS_DIR%"
   call :log "CONFIG_FILE=%CONFIG_FILE%"
@@ -110,7 +114,7 @@ REM *********************************************
 
   REM Install WinGet
   call :log "Calling install_winget.bat"
-  start /min /wait cmd /c "%INSTALLERS_DIR%\install_winget.bat %SANDBOX_DIR%\logs\install_winget.log >> %LOGFILE% 2>&1"
+  start /min /wait cmd /c "%COMMON_DIR%\install_winget.bat %SANDBOX_DIR%\logs\install_winget.log >> %LOGFILE% 2>&1"
 
   REM Reset msstore source (only if needed)
   winget source reset --name msstore > nul
@@ -125,7 +129,11 @@ REM *********************************************
   winget install -e --id EclipseAdoptium.Temurin.17.JDK -h --scope machine --accept-source-agreements --silent > nul 2>&1
   if %errorlevel% neq 0 call :log "JDK17 installation failed with error code %errorlevel%"
 
-exit /b
+  REM Shortcut for 7-Zip
+  call :log "Creating shortcut for 7zip"
+  powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "7-Zip" -TargetPath "C:\Program Files\7-Zip\7zFM.exe"
+
+ exit /b
 
 REM *********************************************
 REM
