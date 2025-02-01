@@ -1,0 +1,15 @@
+[Sat 02/01/2025  8:35:53.72] Starting 
+[Sat 02/01/2025  8:35:53.77] SANDBOX_DIR=c:\sandbox 
+[Sat 02/01/2025  8:35:53.79] CONFIGS_DIR=c:\sandbox\configs 
+[Sat 02/01/2025  8:35:53.81] INSTALLERS_DIR=c:\sandbox\installers 
+[Sat 02/01/2025  8:35:53.83] CONFIG_FILE=c:\sandbox\configs\sandbox.properties 
+[Sat 02/01/2025  8:35:53.85] DEVDIR=C:\Development 
+[Sat 02/01/2025  8:35:53.90] LOGFILE=c:\sandbox\logs\sandbox.log 
+[Sat 02/01/2025  8:35:53.95] Property: URL=http://mikejamesgreco.me 
+[Sat 02/01/2025  8:35:54.01] Property: SPORTS=Soccer,Tennis,Pickleball 
+[Sat 02/01/2025  8:35:54.05] List Property: SPORTS[1]=Soccer 
+[Sat 02/01/2025  8:35:54.07] List Property: SPORTS[2]=Tennis 
+[Sat 02/01/2025  8:35:54.10] List Property: SPORTS[3]=Pickleball 
+[Sat 02/01/2025  8:35:54.15] Calling install_winget.bat 
+[Sat 02/01/2025  8:39:01.48] Installing 7zip 
+[Sat 02/01/2025  8:39:10.39] Installing Eclipse Temurin JDK 17 with Hotspot 
