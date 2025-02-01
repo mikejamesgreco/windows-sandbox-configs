@@ -40,12 +40,12 @@ git clone https://github.com/your-repo/windows-sandbox-configs.git
 ```
 
 ### 🛑 LFS Download Failures? Bandwidth May Be Exceeded
-GitHub LFS has a **1GB monthly bandwidth limit**. If you see errors when downloading LFS-tracked files, it may be due to exceeding this limit. In this case, manually download the required files from their respective vendor or project site and place them in the appropriate `installers/` directory.
+GitHub LFS has a **1GB monthly bandwidth limit**. If you see errors when downloading LFS-tracked files, it may be due to exceeding this limit. In this case, manually download the required files from their respective vendor or project site and place them in the appropriate `installers/` or `common/` directory.
 
 For example, if the Eclipse installer fails to download:
 1. Go to the official Eclipse website: [https://www.eclipse.org/downloads/](https://www.eclipse.org/downloads/)
 2. Download the required version.
-3. Place it in the `installers/` directory manually.
+3. Place it in the `installers/` or `common` directory manually.
 
 This ensures your sandbox configurations work correctly even if GitHub LFS bandwidth is exceeded.
 
