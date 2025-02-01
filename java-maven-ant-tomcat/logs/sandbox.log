@@ -1,15 +1,45 @@
-[Sat 02/01/2025  8:35:53.72] Starting 
-[Sat 02/01/2025  8:35:53.77] SANDBOX_DIR=c:\sandbox 
-[Sat 02/01/2025  8:35:53.79] CONFIGS_DIR=c:\sandbox\configs 
-[Sat 02/01/2025  8:35:53.81] INSTALLERS_DIR=c:\sandbox\installers 
-[Sat 02/01/2025  8:35:53.83] CONFIG_FILE=c:\sandbox\configs\sandbox.properties 
-[Sat 02/01/2025  8:35:53.85] DEVDIR=C:\Development 
-[Sat 02/01/2025  8:35:53.90] LOGFILE=c:\sandbox\logs\sandbox.log 
-[Sat 02/01/2025  8:35:53.95] Property: URL=http://mikejamesgreco.me 
-[Sat 02/01/2025  8:35:54.01] Property: SPORTS=Soccer,Tennis,Pickleball 
-[Sat 02/01/2025  8:35:54.05] List Property: SPORTS[1]=Soccer 
-[Sat 02/01/2025  8:35:54.07] List Property: SPORTS[2]=Tennis 
-[Sat 02/01/2025  8:35:54.10] List Property: SPORTS[3]=Pickleball 
-[Sat 02/01/2025  8:35:54.15] Calling install_winget.bat 
-[Sat 02/01/2025  8:39:01.48] Installing 7zip 
-[Sat 02/01/2025  8:39:10.39] Installing Eclipse Temurin JDK 17 with Hotspot 
+[Sat 02/01/2025 10:56:59.22] Starting 
+[Sat 02/01/2025 10:56:59.35] SANDBOX_DIR=c:\sandbox 
+[Sat 02/01/2025 10:56:59.40] CONFIGS_DIR=c:\sandbox\configs 
+[Sat 02/01/2025 10:56:59.43] INSTALLERS_DIR=c:\sandbox\installers 
+[Sat 02/01/2025 10:56:59.47] CONFIG_FILE=c:\sandbox\configs\sandbox.properties 
+[Sat 02/01/2025 10:56:59.52] DEVDIR=C:\Development 
+[Sat 02/01/2025 10:56:59.57] LOGFILE=c:\sandbox\logs\sandbox.log 
+[Sat 02/01/2025 10:56:59.63] Property: URL=http://mikejamesgreco.me 
+[Sat 02/01/2025 10:56:59.90] Property: SPORTS=Soccer,Tennis,Pickleball 
+[Sat 02/01/2025 10:57:00.02] List Property: SPORTS[1]=Soccer 
+[Sat 02/01/2025 10:57:00.05] List Property: SPORTS[2]=Tennis 
+[Sat 02/01/2025 10:57:00.11] List Property: SPORTS[3]=Pickleball 
+[Sat 02/01/2025 10:57:00.19] Calling install_winget.bat 
+[Sat 02/01/2025 10:58:13.44] Installing 7zip 
+[Sat 02/01/2025 10:58:21.64] Installing Eclipse Temurin JDK 17 with Hotspot 
+[Sat 02/01/2025 10:58:47.27] Installing Git 
+[Sat 02/01/2025 10:59:13.23] Installing Notepad++ 
+[Sat 02/01/2025 10:59:19.01] Installing Eclipse (jee-2024-12-R-win32-x86_64) 
+[Sat 02/01/2025 10:59:40.73] Installing Lombok 
+[Sat 02/01/2025 10:59:41.58] Installing Maven (apache-maven-3.9.9-bin) 
+[Sat 02/01/2025 10:59:41.90] MAVEN_HOME is set to C:\Development\apache-maven-3.9.9 
+[Sat 02/01/2025 10:59:42.01] PATH is updated to include C:\Development\apache-maven-3.9.9\bin 
+[Sat 02/01/2025 10:59:42.10] Installing Ant (apache-ant-1.10.15-bin) 
+[Sat 02/01/2025 10:59:43.19] ANT_HOME is set to C:\Development\apache-ant-1.10.15 
+[Sat 02/01/2025 10:59:43.26] PATH is updated to include C:\Development\apache-ant-1.10.15\bin 
+[Sat 02/01/2025 10:59:43.29] Installing Tomcat (apache-tomcat-11.0.2) 
+[Sat 02/01/2025 10:59:43.90] Creating shortcut for 7zip 
+[Sat 02/01/2025 10:59:46.32] Creating shortcut for Git Bash 
+[Sat 02/01/2025 10:59:48.42] Creating shortcut for Notepad++ 
+[Sat 02/01/2025 10:59:50.54] Creating shortcut for Eclipse 
+[Sat 02/01/2025 10:59:52.69] Creating shortcut for Start Tomcat 
+[Sat 02/01/2025 10:59:54.85] Creating shortcut for Stop Tomcat 
+[Sat 02/01/2025 10:59:57.01] Creating shortcut for Restart Tomcat 
+[Sat 02/01/2025 10:59:59.04] Creating shortcut for Tomcat Manager 
+[Sat 02/01/2025 11:00:01.10] Creating shortcut for Tomcat Homepage 
+[Sat 02/01/2025 11:00:03.29] Creating shortcut for Tomcat Logs 
+[Sat 02/01/2025 11:00:05.32] Creating shortcut for Tomcat Config 
+[Sat 02/01/2025 11:00:07.51] Searching for java.exe 
+[Sat 02/01/2025 11:00:10.76] JAVA_HOME is set to C:\Program Files\Eclipse Adoptium\jdk-17.0.14.7-hotspot 
+[Sat 02/01/2025 11:00:10.86] PATH is updated to include C:\Program Files\Eclipse Adoptium\jdk-17.0.14.7-hotspot\bin 
+[Sat 02/01/2025 11:00:11.07] Setting file extensions to be visible 
+[Sat 02/01/2025 11:00:11.21] Setting desktop icons to auto sort 
+[Sat 02/01/2025 11:00:11.34] Setting desktop background to black 
+[Sat 02/01/2025 11:00:11.70] Elapsed Time is 0:03:12.43 
+[Sat 02/01/2025 11:00:11.92] IP Address is 172.24.166.226 

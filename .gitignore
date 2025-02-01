@@ -2,14 +2,26 @@
 
 base/logs/*
 java-minimal/logs/*
+java-tomcat/logs/*
+java-maven-ant-tomcat/logs/*
 
 base/data/*
 java-minimal/data/*
+java-tomcat/data/*
+java-maven-ant-tomcat/data/*
 
 # Keep the .gitkeepifempty files
 
-!base/data/.gitkeepifempty
-!java-minimal/data/.gitkeepifempty
-
 !base/logs/.gitkeepifempty
 !java-minimal/logs/.gitkeepifempty
+!java-tomcat/logs/.gitkeepifempty
+!java-maven-ant-tomcat/logs/.gitkeepifempty
+
+!base/data/.gitkeepifempty
+!java-minimal/data/.gitkeepifempty
+!java-tomcat/data/.gitkeepifempty
+!java-maven-ant-tomcat/data/.gitkeepifempty
+
+# Misc
+
+common/proxy_info.txt
