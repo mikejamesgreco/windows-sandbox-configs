@@ -1,0 +1,38 @@
+[Sat 02/01/2025  7:17:19.88] Starting 
+[Sat 02/01/2025  7:17:19.93] SANDBOX_DIR=c:\sandbox 
+[Sat 02/01/2025  7:17:19.96] CONFIGS_DIR=c:\sandbox\configs 
+[Sat 02/01/2025  7:17:19.98] INSTALLERS_DIR=c:\sandbox\installers 
+[Sat 02/01/2025  7:17:20.00] CONFIG_FILE=c:\sandbox\configs\sandbox.properties 
+[Sat 02/01/2025  7:17:20.03] DEVDIR=C:\Development 
+[Sat 02/01/2025  7:17:20.06] LOGFILE=c:\sandbox\logs\sandbox.log 
+[Sat 02/01/2025  7:17:20.12] Property: URL=http://mikejamesgreco.me 
+[Sat 02/01/2025  7:17:20.17] Property: SPORTS=Soccer,Tennis,Pickleball 
+[Sat 02/01/2025  7:17:20.23] List Property: SPORTS[1]=Soccer 
+[Sat 02/01/2025  7:17:20.25] List Property: SPORTS[2]=Tennis 
+[Sat 02/01/2025  7:17:20.28] List Property: SPORTS[3]=Pickleball 
+[Sat 02/01/2025  7:17:20.37] Calling install_winget.bat 
+[Sat 02/01/2025  7:20:34.23] Installing 7zip 
+[Sat 02/01/2025  7:20:44.05] Installing Eclipse Temurin JDK 17 with Hotspot 
+[Sat 02/01/2025  7:22:18.30] Installing Git 
+[Sat 02/01/2025  7:22:48.27] Installing Notepad++ 
+[Sat 02/01/2025  7:22:53.68] Installing Eclipse (jee-2024-12-R-win32-x86_64) 
+[Sat 02/01/2025  7:23:11.35] Installing Lombok 
+[Sat 02/01/2025  7:23:11.99] Installing Tomcat (apache-tomcat-11.0.2) 
+[Sat 02/01/2025  7:23:12.75] Creating shortcut for 7zip 
+[Sat 02/01/2025  7:23:15.44] Creating shortcut for Git Bash 
+[Sat 02/01/2025  7:23:17.73] Creating shortcut for Notepad++ 
+[Sat 02/01/2025  7:23:20.36] Creating shortcut for Eclipse 
+[Sat 02/01/2025  7:23:23.00] Creating shortcut for Start Tomcat 
+[Sat 02/01/2025  7:23:25.15] Creating shortcut for Stop Tomcat 
+[Sat 02/01/2025  7:23:27.32] Creating shortcut for Restart Tomcat 
+[Sat 02/01/2025  7:23:29.48] Creating shortcut for Tomcat Manager 
+[Sat 02/01/2025  7:23:31.58] Creating shortcut for Tomcat Homepage 
+[Sat 02/01/2025  7:23:33.67] Creating shortcut for Tomcat Logs 
+[Sat 02/01/2025  7:23:35.78] Creating shortcut for Tomcat Config 
+[Sat 02/01/2025  7:23:37.86] Searching for java.exe 
+[Sat 02/01/2025  7:23:40.35] JAVA_HOME is set to C:\Program Files\Eclipse Adoptium\jdk-17.0.14.7-hotspot 
+[Sat 02/01/2025  7:23:40.38] PATH is updated to include C:\Program Files\Eclipse Adoptium\jdk-17.0.14.7-hotspot\bin 
+[Sat 02/01/2025  7:23:40.41] Setting file extensions to be visible 
+[Sat 02/01/2025  7:23:40.45] Setting desktop icons to auto sort 
+[Sat 02/01/2025  7:23:40.49] Setting desktop background to black 
+[Sat 02/01/2025  7:23:40.62] Elapsed Time is 0:06:20.80 

@@ -1,0 +1,17 @@
+<Configuration>
+  <MappedFolders>
+    <MappedFolder>
+      <HostFolder>C:\mikejamesgrecollc\git\windows-sandbox-configs\java-tomcat</HostFolder>
+      <SandboxFolder>C:\sandbox</SandboxFolder>
+      <ReadOnly>false</ReadOnly>
+    </MappedFolder>
+    <MappedFolder>
+      <HostFolder>C:\mikejamesgrecollc\git\windows-sandbox-configs\common</HostFolder>
+      <SandboxFolder>C:\common</SandboxFolder>
+      <ReadOnly>false</ReadOnly>
+    </MappedFolder>
+  </MappedFolders>
+  <LogonCommand>
+    <Command>cmd.exe /c C:\sandbox\sandbox.bat SAFE</Command>
+  </LogonCommand>
+</Configuration>

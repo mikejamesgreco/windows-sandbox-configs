@@ -1,7 +1,8 @@
 param (
     [string]$ShortcutName,
     [string]$TargetPath,
-    [string]$WorkingDirectory = ""
+    [string]$WorkingDirectory = "",
+    [string]$Arguments = ""
 )
 
 # Get the desktop path
@@ -22,6 +23,11 @@ if ($WorkingDirectory -eq "") {
     $Shortcut.WorkingDirectory = [System.IO.Path]::GetDirectoryName($TargetPath)
 } else {
     $Shortcut.WorkingDirectory = $WorkingDirectory
+}
+
+# Set arguments if provided
+if ($Arguments -ne "") {
+    $Shortcut.Arguments = $Arguments
 }
 
 # Save shortcut
