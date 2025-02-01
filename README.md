@@ -49,3 +49,19 @@ For example, if the Eclipse installer fails to download:
 
 This ensures your sandbox configurations work correctly even if GitHub LFS bandwidth is exceeded.
 
+# Windows Sandbox Proxy Setup
+
+This script (`setup_sandbox_proxy.bat`) configures a **port proxy** using Windows `netsh` to forward traffic from your **local machine (laptop)** to a **Windows Sandbox running Tomcat**.
+
+## 🛠️ How It Works
+- Reads the **Sandbox IP** from `C:\common\sandbox_ip_address.txt`.
+- Detects the **Laptop’s Local IP Address** automatically.
+- Uses **Windows `netsh`** to forward port `8080` from the laptop to the sandbox.
+- Supports **adding, removing, and checking the proxy status**.
+
+## 🚀 Usage
+
+### **1️⃣ Add the Proxy Route**
+This will forward `192.168.50.111:8080` to the **sandbox's IP and port**.
+```sh
+C:\common\setup_sandbox_proxy.bat add (or remove)
