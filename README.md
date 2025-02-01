@@ -57,11 +57,11 @@ This script (`setup_sandbox_proxy.bat`) configures a **port proxy** using Window
 - Reads the **Sandbox IP** from `C:\common\sandbox_ip_address.txt`.
 - Detects the **Laptop’s Local IP Address** automatically.
 - Uses **Windows `netsh`** to forward port `8080` from the laptop to the sandbox.
-- Supports **adding, removing, and checking the proxy status**.
+- Supports **adding, removing, see proxy_info.txt for status**.
 
 ## 🚀 Usage
 
 ### **1️⃣ Add the Proxy Route**
-This will forward `192.168.50.111:8080` to the **sandbox's IP and port**.
+This will forward `192.168.N.N:8080` to the **sandbox's IP and port**.
 ```sh
 C:\common\setup_sandbox_proxy.bat add (or remove)
