@@ -25,3 +25,6 @@ java-maven-ant-tomcat/data/*
 # Misc
 
 common/proxy_info.txt
+common/*.html
+common/*.png
+common/sandbox_ip_address.txt
