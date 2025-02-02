@@ -1,34 +1,45 @@
-[Sat 02/01/2025 18:30:55.62] Starting 
-[Sat 02/01/2025 18:30:55.70] SANDBOX_DIR=C:\sandbox 
-[Sat 02/01/2025 18:30:55.73] COMMON_DIR=C:\common 
-[Sat 02/01/2025 18:30:55.76] CONFIGS_DIR=C:\sandbox\configs 
-[Sat 02/01/2025 18:30:55.82] INSTALLERS_DIR=C:\sandbox\installers 
-[Sat 02/01/2025 18:30:55.87] CONFIG_FILE=C:\sandbox\configs\sandbox.properties 
-[Sat 02/01/2025 18:30:55.92] LOGFILE=C:\sandbox\logs\sandbox.log 
-[Sat 02/01/2025 18:30:56.00] Property: URL=https://mikejamesgreco.me 
-[Sat 02/01/2025 18:30:56.25] Property: SPORTS=Soccer,Tennis,Pickleball 
-[Sat 02/01/2025 18:30:56.51] List Property: SPORTS[1]=Soccer 
-[Sat 02/01/2025 18:30:56.55] List Property: SPORTS[2]=Tennis 
-[Sat 02/01/2025 18:30:56.60] List Property: SPORTS[3]=Pickleball 
-[Sat 02/01/2025 18:30:56.69] Calling install_winget.bat 
-[Sat 02/01/2025 18:32:14.93] Installing 7zip 
-[Sat 02/01/2025 18:32:22.86] Installing Git 
-[Sat 02/01/2025 18:32:59.78] Installing Notepad++ 
-[Sat 02/01/2025 18:33:06.42] Installing NodeJS (LTS) 
-[Sat 02/01/2025 18:33:34.80] Installing Microsoft VS Code 
-[Sat 02/01/2025 18:34:19.87] Installing Angular 
-[Sat 02/01/2025 18:34:43.80] Installing Ionic 
-[Sat 02/01/2025 18:35:05.15] Installing Cordova 
-[Sat 02/01/2025 18:35:38.31] Creating shortcut for 7zip 
-[Sat 02/01/2025 18:35:45.01] Creating shortcut for Visual Studio Code 
-[Sat 02/01/2025 18:35:48.03] Creating shortcut for Git Bash 
-[Sat 02/01/2025 18:35:50.96] Creating shortcut for Node.js CMD 
-[Sat 02/01/2025 18:35:53.96] Creating shortcut for Angular CLI Version Check 
-[Sat 02/01/2025 18:35:56.92] Creating shortcut for Ionic CLI Version Check 
-[Sat 02/01/2025 18:35:59.90] Creating shortcut for Angular Project Folder 
-[Sat 02/01/2025 18:36:02.87] Creating shortcut for Ionic Project Folder 
-[Sat 02/01/2025 18:36:05.71] Adding node and git to PATH 
-[Sat 02/01/2025 18:36:05.90] Setting file extensions to be visible 
-[Sat 02/01/2025 18:36:06.01] Setting desktop icons to auto sort 
-[Sat 02/01/2025 18:36:06.12] Setting desktop background to black 
-[Sat 02/01/2025 18:36:06.50] Elapsed Time is 0:05:10.84 
+[Sun 02/02/2025 15:05:40.75] Starting 
+[Sun 02/02/2025 15:05:40.82] SANDBOX_DIR=C:\sandbox 
+[Sun 02/02/2025 15:05:40.86] COMMON_DIR=C:\common 
+[Sun 02/02/2025 15:05:40.89] CONFIGS_DIR=C:\sandbox\configs 
+[Sun 02/02/2025 15:05:40.97] INSTALLERS_DIR=C:\sandbox\installers 
+[Sun 02/02/2025 15:05:41.00] CONFIG_FILE=C:\sandbox\configs\sandbox.properties 
+[Sun 02/02/2025 15:05:41.05] LOGFILE=C:\sandbox\logs\sandbox.log 
+[Sun 02/02/2025 15:05:41.15] Property: URL=https://mikejamesgreco.me 
+[Sun 02/02/2025 15:05:41.51] Property: SPORTS=Soccer,Tennis,Pickleball 
+[Sun 02/02/2025 15:05:41.61] List Property: SPORTS[1]=Soccer 
+[Sun 02/02/2025 15:05:41.64] List Property: SPORTS[2]=Tennis 
+[Sun 02/02/2025 15:05:41.67] List Property: SPORTS[3]=Pickleball 
+[Sun 02/02/2025 15:05:41.73] Calling install_winget.bat 
+[Sun 02/02/2025 15:06:53.91] Installing 7zip 
+[Sun 02/02/2025 15:07:02.41] Installing Git 
+[Sun 02/02/2025 15:07:28.22] Installing Notepad++ 
+[Sun 02/02/2025 15:07:34.79] Installing NodeJS (LTS) 
+[Sun 02/02/2025 15:07:59.86] Installing Microsoft VS Code 
+[Sun 02/02/2025 15:08:32.39] Installing Angular 
+[Sun 02/02/2025 15:08:52.21] Installing Ionic 
+[Sun 02/02/2025 15:09:10.52] Installing Cordova 
+[Sun 02/02/2025 15:09:36.49] Installing ESLint 
+[Sun 02/02/2025 15:09:41.65] Creating shortcut for 7zip 
+[Sun 02/02/2025 15:09:47.07] Creating shortcut for Visual Studio Code 
+[Sun 02/02/2025 15:09:49.98] Creating shortcut for Git Bash 
+[Sun 02/02/2025 15:09:52.88] Creating shortcut for Node.js CMD 
+[Sun 02/02/2025 15:09:55.72] Creating shortcut for Angular CLI Version Check 
+[Sun 02/02/2025 15:09:58.69] Creating shortcut for Ionic CLI Version Check 
+[Sun 02/02/2025 15:10:01.58] Creating shortcut for Angular Project Folder 
+[Sun 02/02/2025 15:10:04.67] Creating shortcut for Ionic Project Folder 
+[Sun 02/02/2025 15:10:07.52] Installing Angular Language Service... 
+[Sun 02/02/2025 15:10:16.38] Installing Ionic Extension Pack... 
+[Sun 02/02/2025 15:10:17.12] Installing TypeScript Hero... 
+[Sun 02/02/2025 15:10:30.49] Installing ESLint... 
+[Sun 02/02/2025 15:10:32.73] Installing Prettier Code Formatter... 
+[Sun 02/02/2025 15:10:34.79] Installing HTML CSS Support... 
+[Sun 02/02/2025 15:10:36.70] Installing Path Intellisense... 
+[Sun 02/02/2025 15:10:38.74] Installing JSON Tools... 
+[Sun 02/02/2025 15:10:41.25] Installing JSON Language Support by Red Hat... 
+[Sun 02/02/2025 15:10:42.06] Installing JSON Crack Visualizer... 
+[Sun 02/02/2025 15:10:43.97] Adding node and git and code (vs code) to PATH 
+[Sun 02/02/2025 15:10:44.23] Setting file extensions to be visible 
+[Sun 02/02/2025 15:10:44.35] Setting desktop icons to auto sort 
+[Sun 02/02/2025 15:10:44.45] Setting desktop background to black 
+[Sun 02/02/2025 15:10:44.85] Elapsed Time is 0:05:04.03 

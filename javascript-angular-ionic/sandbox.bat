@@ -165,6 +165,11 @@ REM *********************************************
   call "C:\Program Files\nodejs\npm.cmd" install -g cordova > nul 2>&1
   if %errorlevel% neq 0 call :log "Cordova installation failed with error code %errorlevel%"
 
+  REM Install ESLint
+  call :log "Installing ESLint"
+  call "C:\Program Files\nodejs\npm.cmd" install -g eslint > nul 2>&1
+  if %errorlevel% neq 0 call :log "ESLint installation failed with error code %errorlevel%"
+
   REM Shortcut for 7-Zip
   call :log "Creating shortcut for 7zip"
   powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "7-Zip" -TargetPath "C:\Program Files\7-Zip\7zFM.exe"
@@ -197,12 +202,47 @@ REM *********************************************
   call :log "Creating shortcut for Ionic Project Folder"
   powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Ionic Projects" -TargetPath "%DEVDIR%\IonicProjects"
 
-  REM Update path
-  call :log "Adding node and git to PATH"
-  set PATH=%PATH%;C:\Program Files\Git\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs
-  setx PATH %PATH%;C:\Program Files\Git\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs /m
+  REM Set code command
+  set CODE_CMD="C:\Program Files\Microsoft VS Code\bin\code.cmd"
 
- exit /b
+  REM --- Angular & Ionic Extensions ---
+  call :log "Installing Angular Language Service..."
+  call %CODE_CMD% --install-extension Angular.ng-template > nul 2>&1
+
+  call :log "Installing Ionic Extension Pack..."
+  call %CODE_CMD% --install-extension jgw9617.ionic-extension-pack > nul 2>&1
+
+  call :log "Installing TypeScript Hero..."
+  call %CODE_CMD% --install-extension rbbit.typescript-hero > nul 2>&1
+
+  call :log "Installing ESLint..."
+  call %CODE_CMD% --install-extension dbaeumer.vscode-eslint > nul 2>&1
+
+  call :log "Installing Prettier Code Formatter..."
+  call %CODE_CMD% --install-extension esbenp.prettier-vscode > nul 2>&1
+
+  call :log "Installing HTML CSS Support..."
+  call %CODE_CMD% --install-extension ecmel.vscode-html-css > nul 2>&1
+
+  call :log "Installing Path Intellisense..."
+  call %CODE_CMD% --install-extension christian-kohler.path-intellisense > nul 2>&1
+
+  REM --- JSON Extensions ---
+  call :log "Installing JSON Tools..."
+  call %CODE_CMD% --install-extension eriklynd.json-tools > nul 2>&1
+
+  call :log "Installing JSON Language Support by Red Hat..."
+  call %CODE_CMD% --install-extension redhat.vscode-json > nul 2>&1
+
+  call :log "Installing JSON Crack Visualizer..."
+  call %CODE_CMD% --install-extension AykutSarac.jsoncrack-vscode > nul 2>&1
+
+  REM Update path
+  call :log "Adding node and git and code (vs code) to PATH"
+  set PATH=%PATH%;C:\Program Files\Git\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs;C:\Program Files\Microsoft VS Code\bin
+  setx PATH "%PATH%;C:\Program Files\Git\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs;C:\Program Files\Microsoft VS Code\bin" /m
+
+exit /b
 
 REM *********************************************
 REM
