@@ -1,4 +1,4 @@
-# Ignore all files inside logs and data subfolders
+# Ignore all files inside logs and data subfolders 
 
 base/logs/*
 java-minimal/logs/*

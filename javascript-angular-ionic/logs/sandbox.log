@@ -1,45 +1,45 @@
-[Sun 02/02/2025 15:05:40.75] Starting 
-[Sun 02/02/2025 15:05:40.82] SANDBOX_DIR=C:\sandbox 
-[Sun 02/02/2025 15:05:40.86] COMMON_DIR=C:\common 
-[Sun 02/02/2025 15:05:40.89] CONFIGS_DIR=C:\sandbox\configs 
-[Sun 02/02/2025 15:05:40.97] INSTALLERS_DIR=C:\sandbox\installers 
-[Sun 02/02/2025 15:05:41.00] CONFIG_FILE=C:\sandbox\configs\sandbox.properties 
-[Sun 02/02/2025 15:05:41.05] LOGFILE=C:\sandbox\logs\sandbox.log 
-[Sun 02/02/2025 15:05:41.15] Property: URL=https://mikejamesgreco.me 
-[Sun 02/02/2025 15:05:41.51] Property: SPORTS=Soccer,Tennis,Pickleball 
-[Sun 02/02/2025 15:05:41.61] List Property: SPORTS[1]=Soccer 
-[Sun 02/02/2025 15:05:41.64] List Property: SPORTS[2]=Tennis 
-[Sun 02/02/2025 15:05:41.67] List Property: SPORTS[3]=Pickleball 
-[Sun 02/02/2025 15:05:41.73] Calling install_winget.bat 
-[Sun 02/02/2025 15:06:53.91] Installing 7zip 
-[Sun 02/02/2025 15:07:02.41] Installing Git 
-[Sun 02/02/2025 15:07:28.22] Installing Notepad++ 
-[Sun 02/02/2025 15:07:34.79] Installing NodeJS (LTS) 
-[Sun 02/02/2025 15:07:59.86] Installing Microsoft VS Code 
-[Sun 02/02/2025 15:08:32.39] Installing Angular 
-[Sun 02/02/2025 15:08:52.21] Installing Ionic 
-[Sun 02/02/2025 15:09:10.52] Installing Cordova 
-[Sun 02/02/2025 15:09:36.49] Installing ESLint 
-[Sun 02/02/2025 15:09:41.65] Creating shortcut for 7zip 
-[Sun 02/02/2025 15:09:47.07] Creating shortcut for Visual Studio Code 
-[Sun 02/02/2025 15:09:49.98] Creating shortcut for Git Bash 
-[Sun 02/02/2025 15:09:52.88] Creating shortcut for Node.js CMD 
-[Sun 02/02/2025 15:09:55.72] Creating shortcut for Angular CLI Version Check 
-[Sun 02/02/2025 15:09:58.69] Creating shortcut for Ionic CLI Version Check 
-[Sun 02/02/2025 15:10:01.58] Creating shortcut for Angular Project Folder 
-[Sun 02/02/2025 15:10:04.67] Creating shortcut for Ionic Project Folder 
-[Sun 02/02/2025 15:10:07.52] Installing Angular Language Service... 
-[Sun 02/02/2025 15:10:16.38] Installing Ionic Extension Pack... 
-[Sun 02/02/2025 15:10:17.12] Installing TypeScript Hero... 
-[Sun 02/02/2025 15:10:30.49] Installing ESLint... 
-[Sun 02/02/2025 15:10:32.73] Installing Prettier Code Formatter... 
-[Sun 02/02/2025 15:10:34.79] Installing HTML CSS Support... 
-[Sun 02/02/2025 15:10:36.70] Installing Path Intellisense... 
-[Sun 02/02/2025 15:10:38.74] Installing JSON Tools... 
-[Sun 02/02/2025 15:10:41.25] Installing JSON Language Support by Red Hat... 
-[Sun 02/02/2025 15:10:42.06] Installing JSON Crack Visualizer... 
-[Sun 02/02/2025 15:10:43.97] Adding node and git and code (vs code) to PATH 
-[Sun 02/02/2025 15:10:44.23] Setting file extensions to be visible 
-[Sun 02/02/2025 15:10:44.35] Setting desktop icons to auto sort 
-[Sun 02/02/2025 15:10:44.45] Setting desktop background to black 
-[Sun 02/02/2025 15:10:44.85] Elapsed Time is 0:05:04.03 
+[Tue 02/04/2025 19:13:00.60] Starting 
+[Tue 02/04/2025 19:13:00.68] SANDBOX_DIR=C:\sandbox 
+[Tue 02/04/2025 19:13:00.72] COMMON_DIR=C:\common 
+[Tue 02/04/2025 19:13:00.77] CONFIGS_DIR=C:\sandbox\configs 
+[Tue 02/04/2025 19:13:00.80] INSTALLERS_DIR=C:\sandbox\installers 
+[Tue 02/04/2025 19:13:00.85] CONFIG_FILE=C:\sandbox\configs\sandbox.properties 
+[Tue 02/04/2025 19:13:00.90] LOGFILE=C:\sandbox\logs\sandbox.log 
+[Tue 02/04/2025 19:13:00.93] DEVDIR=C:\Development 
+[Tue 02/04/2025 19:13:00.97] PATH=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Users\WDAGUtilityAccount\AppData\Local\Microsoft\WindowsApps 
+[Tue 02/04/2025 19:13:01.07] Property: URL=https://mikejamesgreco.me 
+[Tue 02/04/2025 19:13:01.60] Property: SPORTS=Soccer,Tennis,Pickleball 
+[Tue 02/04/2025 19:13:01.77] List Property: SPORTS[1]=Soccer 
+[Tue 02/04/2025 19:13:01.80] List Property: SPORTS[2]=Tennis 
+[Tue 02/04/2025 19:13:01.85] List Property: SPORTS[3]=Pickleball 
+[Tue 02/04/2025 19:13:01.91] Calling install_winget.bat 
+[Tue 02/04/2025 19:14:20.33] Installing 7zip 
+[Tue 02/04/2025 19:14:27.32] Installing Git 
+[Tue 02/04/2025 19:14:53.96] Installing Notepad++ 
+[Tue 02/04/2025 19:14:59.08] Installing NodeJS (LTS) 
+[Tue 02/04/2025 19:15:20.01] Installing Microsoft VS Code 
+[Tue 02/04/2025 19:15:59.98] Installing Angular 
+[Tue 02/04/2025 19:16:19.39] Installing Ionic 
+[Tue 02/04/2025 19:16:37.77] Installing Cordova 
+[Tue 02/04/2025 19:17:03.02] Installing ESLint 
+[Tue 02/04/2025 19:17:05.72] Creating shortcut for 7zip 
+[Tue 02/04/2025 19:17:08.17] Creating shortcut for Visual Studio Code 
+[Tue 02/04/2025 19:17:09.86] Creating shortcut for Git Bash 
+[Tue 02/04/2025 19:17:11.64] Creating shortcut for Node.js CMD 
+[Tue 02/04/2025 19:17:13.33] Creating shortcut for Angular CLI Version Check 
+[Tue 02/04/2025 19:17:14.98] Creating shortcut for Ionic CLI Version Check 
+[Tue 02/04/2025 19:17:16.71] Creating shortcut for Angular Project Folder 
+[Tue 02/04/2025 19:17:18.40] Creating shortcut for Ionic Project Folder 
+[Tue 02/04/2025 19:17:20.04] Installing Angular Language Service... 
+[Tue 02/04/2025 19:17:29.82] Installing Ionic Extension Pack... 
+[Tue 02/04/2025 19:17:30.38] Installing TypeScript Hero... 
+[Tue 02/04/2025 19:17:42.33] Installing ESLint... 
+[Tue 02/04/2025 19:17:44.92] Installing Prettier Code Formatter... 
+[Tue 02/04/2025 19:17:46.72] Installing HTML CSS Support... 
+[Tue 02/04/2025 19:17:49.60] Installing Path Intellisense... 
+[Tue 02/04/2025 19:17:52.77] Installing JSON Tools... 
+[Tue 02/04/2025 19:17:57.35] Installing JSON Language Support by Red Hat... 
+[Tue 02/04/2025 19:17:57.90] Installing JSON Crack Visualizer... 
+[Tue 02/04/2025 19:17:59.94] Setting file extensions to be visible 
+[Tue 02/04/2025 19:18:00.06] Setting desktop icons to auto sort 
+[Tue 02/04/2025 19:18:00.33] Elapsed Time is 0:04:59.68 
