@@ -22,11 +22,9 @@ call :set_starttime
 call :init_environment
 call :read_config
 call :call_installers
-call :set_java_home
 call :set_desktop_prefs
 call :set_endtime
 call :calculate_elapsed_time
-call :reset_desktop
 
 REM *********************************************
 REM
@@ -119,60 +117,7 @@ REM *********************************************
   REM Reset msstore source (only if needed)
   winget source reset --name msstore > nul
 
-  REM Install 7zip using winget
-  call :log "Installing 7zip"
-  winget install -e --id 7zip.7zip -h --accept-source-agreements --silent > nul 2>&1
-  if %errorlevel% neq 0 call :log "7zip installation failed with error code %errorlevel%"
-
-  REM Install Eclipse Temurin JDK 17 with Hotspot
-  call :log "Installing Eclipse Temurin JDK 17 with Hotspot"
-  winget install -e --id EclipseAdoptium.Temurin.17.JDK -h --scope machine --accept-source-agreements --silent > nul 2>&1
-  if %errorlevel% neq 0 call :log "JDK17 installation failed with error code %errorlevel%"
-
-  REM Shortcut for 7-Zip
-  call :log "Creating shortcut for 7zip"
-  powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "7-Zip" -TargetPath "C:\Program Files\7-Zip\7zFM.exe"
-
  exit /b
-
-REM *********************************************
-REM
-REM set_java_home
-REM
-REM *********************************************
-
-:set_java_home
-
-  REM Define the search term and specific directories to search
-  set "search_term=java.exe"
-  set "found_path="
-  call :log "Searching for %search_term%"
-
-  for %%D in ("C:\Program Files" "C:\Program Files (x86)" "C:\ProgramData" "C:\Users\%USERNAME%\AppData\Local\Programs") do (
-      for /f "delims=" %%a in ('dir /s /b "%%~D\%search_term%" 2^>nul') do (
-          set "found_path=%%~dpa"
-          goto :FOUND_JAVA
-      ) 
-  )
-
-  :NOT_FOUND
-  call :log "%search_term% not found in likely directories"
-  exit /b 1
-
-  :FOUND_JAVA
-  REM Trim "\bin\" from the found path using PowerShell
-  for /f "delims=" %%A in ('powershell -NoProfile -Command "[regex]::Replace('%found_path%'.TrimEnd(), '\\bin[\\/]?\s*$', '')"') do set "found_path=%%A"
-
-  REM Set JAVA_HOME and update PATH
-  set JAVA_HOME=%found_path%
-  setx JAVA_HOME "%found_path%" /m
-  call :log "JAVA_HOME is set to %JAVA_HOME%"
-
-  set PATH=%PATH%;%JAVA_HOME%\bin
-  setx PATH "%PATH%" /m
-  call :log "PATH is updated to include %JAVA_HOME%\bin"
-
-exit /b
 
 REM *********************************************
 REM
@@ -190,12 +135,7 @@ REM *********************************************
   call :log "Setting desktop icons to auto sort"
   reg add "HKCU\Software\Microsoft\Windows\Shell\Bags\1\Desktop" /v "FFlags" /t REG_DWORD /d 1075839521 /f
 
-  REM Set desktop background to black
-  call :log "Setting desktop background to black"
-  reg add "HKCU\Control Panel\Colors" /v Background /t REG_SZ /d "0 0 0" /f > nul 2>&1
-  reg add "HKCU\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d "" /f > nul 2>&1
-  reg add "HKCU\Control Panel\Desktop" /v WallpaperStyle /t REG_SZ /d 0 /f > nul 2>&1
-  reg add "HKCU\Control Panel\Desktop" /v TileWallpaper /t REG_SZ /d 0 /f > nul 2>&1
+  taskkill /f /im explorer.exe && start explorer.exe
 
 exit /b
 
@@ -229,19 +169,6 @@ REM *********************************************
   if %ss% lss 10 set ss=0%ss%
   if %cc% lss 10 set cc=0%cc%
   call :log "Elapsed Time is %hh%:%mm%:%ss%.%cc%"
-
-exit /b
-
-REM *********************************************
-REM
-REM reset_desktop
-REM
-REM *********************************************
-
-:reset_desktop
-
-  taskkill /IM explorer.exe /F > nul 2>&1
-  start explorer.exe >> %LOGFILE% 2>&1
 
 exit /b
 
