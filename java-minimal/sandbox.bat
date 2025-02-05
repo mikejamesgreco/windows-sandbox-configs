@@ -22,11 +22,9 @@ call :set_starttime
 call :init_environment
 call :read_config
 call :call_installers
-call :set_java_home
 call :set_desktop_prefs
 call :set_endtime
 call :calculate_elapsed_time
-call :reset_desktop
 
 REM *********************************************
 REM
@@ -65,11 +63,13 @@ REM *********************************************
   start powershell -NoExit -Command "Get-Content -Path '%LOGFILE%' -Wait"
 
   call :log "SANDBOX_DIR=%SANDBOX_DIR%"
+  call :log "COMMON_DIR=%COMMON_DIR%"
   call :log "CONFIGS_DIR=%CONFIGS_DIR%"
   call :log "INSTALLERS_DIR=%INSTALLERS_DIR%"
   call :log "CONFIG_FILE=%CONFIG_FILE%"
-  call :log "DEVDIR=%DEVDIR%"
   call :log "LOGFILE=%LOGFILE%"
+  call :log "DEVDIR=%DEVDIR%"
+  call :log "PATH=%PATH%"
 
 exit /b
 
@@ -115,6 +115,8 @@ REM *********************************************
 
 :call_installers
 
+  REM Install Software 
+
   REM Install WinGet
   call :log "Calling install_winget.bat"
   start /min /wait cmd /c "%COMMON_DIR%\install_winget.bat %SANDBOX_DIR%\logs\install_winget.log >> %LOGFILE% 2>&1"
@@ -131,13 +133,12 @@ REM *********************************************
   call :log "Installing Eclipse Temurin JDK 17 with Hotspot"
   winget install -e --id EclipseAdoptium.Temurin.17.JDK -h --scope machine --accept-source-agreements --silent > nul 2>&1
   if %errorlevel% neq 0 call :log "JDK17 installation failed with error code %errorlevel%"
+  call :set_java_home
 
   REM Install Git
   call :log "Installing Git"
   winget install -e --id Git.Git -h --scope machine --accept-source-agreements --silent > nul 2>&1
   if %errorlevel% neq 0 call :log "Git installation failed with error code %errorlevel%"
-  set PATH=%PATH%;"C:\Program Files\Git\bin"
-  setx PATH %PATH%;"C:\Program Files\Git\bin" /m
 
   REM Install Notepad++
   call :log "Installing Notepad++"
@@ -174,6 +175,13 @@ REM *********************************************
   call :log "Creating shortcut for Eclipse"
   powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Eclipse" -TargetPath "C:\Development\eclipse-jee-2024-12-R-win32-x86_64\eclipse\eclipse.exe" -WorkingDirectory "C:\Development\eclipse-jee-2024-09-R-win32-x86_64\eclipse"
 
+  REM Set PATH
+
+  set "NEW_PATH=!PATH!;!JAVA_HOME!\bin;C:\Program Files\7-Zip;C:\Program Files\Git\bin;C:\Program Files\Notepad++;C:\Development\eclipse-jee-2024-12-R-win32-x86_64\eclipse"
+  set PATH=!NEW_PATH!
+  setx PATH "!NEW_PATH!" /m
+  call :log "PATH=!PATH!"
+
 exit /b
 
 REM *********************************************
@@ -209,10 +217,6 @@ REM *********************************************
   setx JAVA_HOME "%found_path%" /m
   call :log "JAVA_HOME is set to %JAVA_HOME%"
 
-  set PATH=%PATH%;%JAVA_HOME%\bin
-  setx PATH "%PATH%" /m
-  call :log "PATH is updated to include %JAVA_HOME%\bin"
-
 exit /b
 
 REM *********************************************
@@ -230,13 +234,6 @@ REM *********************************************
   REM Enable Auto Arrange and Disable Align to Grid
   call :log "Setting desktop icons to auto sort"
   reg add "HKCU\Software\Microsoft\Windows\Shell\Bags\1\Desktop" /v "FFlags" /t REG_DWORD /d 1075839521 /f
-
-  REM Set desktop background to black
-  call :log "Setting desktop background to black"
-  reg add "HKCU\Control Panel\Colors" /v Background /t REG_SZ /d "0 0 0" /f > nul 2>&1
-  reg add "HKCU\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d "" /f > nul 2>&1
-  reg add "HKCU\Control Panel\Desktop" /v WallpaperStyle /t REG_SZ /d 0 /f > nul 2>&1
-  reg add "HKCU\Control Panel\Desktop" /v TileWallpaper /t REG_SZ /d 0 /f > nul 2>&1
 
 exit /b
 
@@ -270,19 +267,6 @@ REM *********************************************
   if %ss% lss 10 set ss=0%ss%
   if %cc% lss 10 set cc=0%cc%
   call :log "Elapsed Time is %hh%:%mm%:%ss%.%cc%"
-
-exit /b
-
-REM *********************************************
-REM
-REM reset_desktop
-REM
-REM *********************************************
-
-:reset_desktop
-
-  taskkill /IM explorer.exe /F > nul 2>&1
-  start explorer.exe >> %LOGFILE% 2>&1
 
 exit /b
 

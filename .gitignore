@@ -4,11 +4,13 @@ base/logs/*
 java-minimal/logs/*
 java-tomcat/logs/*
 java-maven-ant-tomcat/logs/*
+javascript-angular-ionic/logs/*
 
 base/data/*
 java-minimal/data/*
 java-tomcat/data/*
 java-maven-ant-tomcat/data/*
+javascript-angular-ionic/data/*
 
 # Keep the .gitkeepifempty files
 
@@ -16,11 +18,13 @@ java-maven-ant-tomcat/data/*
 !java-minimal/logs/.gitkeepifempty
 !java-tomcat/logs/.gitkeepifempty
 !java-maven-ant-tomcat/logs/.gitkeepifempty
+!javascript-angular-ionic/logs/.gitkeepifempty
 
 !base/data/.gitkeepifempty
 !java-minimal/data/.gitkeepifempty
 !java-tomcat/data/.gitkeepifempty
 !java-maven-ant-tomcat/data/.gitkeepifempty
+!javascript-angular-ionic/data/.gitkeepifempty
 
 # Misc
 
