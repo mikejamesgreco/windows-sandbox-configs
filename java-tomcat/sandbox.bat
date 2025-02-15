@@ -25,6 +25,7 @@ call :call_installers
 call :set_desktop_prefs
 call :set_endtime
 call :calculate_elapsed_time
+call :write_ip
 
 REM *********************************************
 REM
@@ -301,6 +302,29 @@ REM *********************************************
   if %ss% lss 10 set ss=0%ss%
   if %cc% lss 10 set cc=0%cc%
   call :log "Elapsed Time is %hh%:%mm%:%ss%.%cc%"
+
+exit /b
+
+REM *********************************************
+REM
+REM write_ip
+REM
+REM *********************************************
+
+:write_ip
+
+  for /f "tokens=2 delims=:" %%A in ('ipconfig ^| findstr /C:"IPv4 Address"') do (
+    set ip=%%A
+    set ip=!ip:~1!
+    goto :found
+  )
+
+  :found
+  REM Write IP to file
+  (
+    echo|set /p=!ip!
+  ) > C:\common\sandbox_ip_address.txt
+  call :log "IP Address is !ip!"
 
 exit /b
 
