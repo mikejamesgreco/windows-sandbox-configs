@@ -25,7 +25,6 @@ call :call_installers
 call :set_desktop_prefs
 call :set_endtime
 call :calculate_elapsed_time
-call :write_ip
 
 REM *********************************************
 REM
@@ -116,6 +115,8 @@ REM *********************************************
 
 :call_installers
 
+  REM Install Software 
+
   REM Install WinGet
   call :log "Calling install_winget.bat"
   start /min /wait cmd /c "%COMMON_DIR%\install_winget.bat %SANDBOX_DIR%\logs\install_winget.log >> %LOGFILE% 2>&1"
@@ -156,15 +157,17 @@ REM *********************************************
   if %errorlevel% neq 0 call :log "Lombok.jar download failed with error code %errorlevel%"
   echo -javaagent:%DEVDIR%\eclipse-jee-2024-12-R-win32-x86_64\eclipse\lombok.jar >> "%DEVDIR%\eclipse-jee-2024-12-R-win32-x86_64\eclipse\eclipse.ini"
 
-  REM Install Tomcat
-  call :log "Installing Tomcat (apache-tomcat-11.0.2)"
-  copy "%COMMON_DIR%\apache-tomcat-11.0.2.zip" %DEVDIR%
-  "C:\Program Files\7-Zip\7z.exe" x "%DEVDIR%\apache-tomcat-11.0.2.zip" -o"%DEVDIR%" -y > nul 2>&1
-  if %errorlevel% neq 0 call :log "Tomcat installation failed with error code %errorlevel%"
-  set CATALINA_HOME=!DEVDIR!\apache-tomcat-11.0.2
-  setx CATALINA_HOME "!DEVDIR!\apache-tomcat-11.0.2" /m
-  
+  REM Install ApacheDS
+  call :log "Installing ApacheDS (apacheds-2.0.0.AM27)"
+  copy "%COMMON_DIR%\apacheds-2.0.0.AM27.zip" %DEVDIR%
+  "C:\Program Files\7-Zip\7z.exe" x "%DEVDIR%\apacheds-2.0.0.AM27.zip" -o"%DEVDIR%\apacheds-2.0.0.AM27" -y > nul 2>&1
+  if %errorlevel% neq 0 call :log "ApacheDS installation failed with error code %errorlevel%"
   REM Desktop shortcuts
+
+  REM Install Apache Directory Studio
+  call :log "Installing Apache Directory Studio"
+  winget install -e --id Apache.DirectoryStudio -h --scope machine --accept-source-agreements --silent > nul 2>&1
+  if %errorlevel% neq 0 call :log "Apache Directory Studio installation failed with error code %errorlevel%"
 
   REM Shortcut for 7-Zip
   call :log "Creating shortcut for 7zip"
@@ -178,37 +181,33 @@ REM *********************************************
   call :log "Creating shortcut for Notepad++"
   powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Notepad++" -TargetPath "C:\Program Files\Notepad++\notepad++.exe"
 
-  REM Shortcut for Git Bash
+  REM Shortcut for Eclipse
   call :log "Creating shortcut for Eclipse"
   powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Eclipse" -TargetPath "C:\Development\eclipse-jee-2024-12-R-win32-x86_64\eclipse\eclipse.exe" -WorkingDirectory "C:\Development\eclipse-jee-2024-09-R-win32-x86_64\eclipse"
 
-  REM Shortcut for Starting Tomcat
-  call :log "Creating shortcut for Start Tomcat"
-  powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Start Tomcat" -TargetPath "%DEVDIR%\apache-tomcat-11.0.2\bin\startup.bat" -WorkingDirectory "%DEVDIR%\apache-tomcat-11.0.2\bin"
+  REM Shortcut for ApacheDS start
+  call :log "Creating shortcut for ApacheDS start"
+  powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Start ApacheDS" -TargetPath "C:\Development\apacheds-2.0.0.AM27\apacheds-2.0.0.AM28-SNAPSHOT\bin\apacheds.bat" -WorkingDirectory "C:\Development\apacheds-2.0.0.AM27\apacheds-2.0.0.AM28-SNAPSHOT\bin" -Arguments "default start"
 
-  REM Shortcut for Stopping Tomcat
-  call :log "Creating shortcut for Stop Tomcat"
-  powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Stop Tomcat" -TargetPath "%DEVDIR%\apache-tomcat-11.0.2\bin\shutdown.bat" -WorkingDirectory "%DEVDIR%\apache-tomcat-11.0.2\bin"
+  REM Shortcut for ApacheDS stop
+  call :log "Creating shortcut for ApacheDS stop"
+  powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Stop ApacheDS" -TargetPath "C:\Development\apacheds-2.0.0.AM27\apacheds-2.0.0.AM28-SNAPSHOT\bin\apacheds.bat" -WorkingDirectory "C:\Development\apacheds-2.0.0.AM27\apacheds-2.0.0.AM28-SNAPSHOT\bin" -Arguments "default stop"
 
-  REM Shortcut for Restarting Tomcat
-  call :log "Creating shortcut for Restart Tomcat"
-  powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Restart Tomcat" -TargetPath "C:\Windows\System32\cmd.exe" -Arguments "/c %DEVDIR%\apache-tomcat-11.0.2\bin\shutdown.bat && %DEVDIR%\apache-tomcat-11.0.2\bin\startup.bat" -WorkingDirectory "%DEVDIR%\apache-tomcat-11.0.2"
+  REM Shortcut for Viewing ApacheDS Logs
+  call :log "Creating shortcut for ApacheDS logs"
+  powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "ApacheDS Logs" -TargetPath "C:\Program Files\Notepad++\Notepad++.exe" -Arguments "C:\Development\apacheds-2.0.0.AM27\apacheds-2.0.0.AM28-SNAPSHOT\instances\default\log\apacheds.log"
 
-  REM Shortcut for Tomcat Manager Web UI
-  call :log "Creating shortcut for Tomcat Manager"
-  powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Tomcat Manager" -TargetPath "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" -WorkingDirectory "C:\Program Files (x86)\Microsoft\Edge\Application" -Arguments "http://localhost:8080/manager/html"
+  REM Shortcut to Open Apache Directory Studio
+  call :log "Creating shortcut for Apache Directory Studio"
+  powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Apache Directory Studio" -TargetPath "C:\Program Files\Apache Directory Studio\ApacheDirectoryStudio.exe"
 
-  REM Shortcut for Tomcat Homepage
-  call :log "Creating shortcut for Tomcat Homepage"
-  powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Tomcat Homepage" -TargetPath "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" -WorkingDirectory "C:\Program Files (x86)\Microsoft\Edge\Application" -Arguments "http://localhost:8080/"
-
-  REM Shortcut for Tomcat Logs Folder
-  call :log "Creating shortcut for Tomcat Logs"
-  powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Tomcat Logs" -TargetPath "%DEVDIR%\apache-tomcat-11.0.2\logs"
-
-  REM Shortcut for Tomcat Configuration (server.xml)
-  call :log "Creating shortcut for Tomcat Config"
-  powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Tomcat Config" -TargetPath "C:\Program Files\Notepad++\notepad++.exe" -Arguments "%DEVDIR%\apache-tomcat-11.0.2\conf\server.xml"
+  REM Default admin connection to ApacheDS can be imported with the following file:
+  C:\Common\ApacheDS_Connection.lbc
+  Host: localhost
+  Port: 10389
+  Bind DN or user: uid=admin,ou=system
+  Bind password  : secret
+  
 
   REM Set PATH
 
@@ -304,29 +303,6 @@ REM *********************************************
   if %ss% lss 10 set ss=0%ss%
   if %cc% lss 10 set cc=0%cc%
   call :log "Elapsed Time is %hh%:%mm%:%ss%.%cc%"
-
-exit /b
-
-REM *********************************************
-REM
-REM write_ip
-REM
-REM *********************************************
-
-:write_ip
-
-  for /f "tokens=2 delims=:" %%A in ('ipconfig ^| findstr /C:"IPv4 Address"') do (
-    set ip=%%A
-    set ip=!ip:~1!
-    goto :found
-  )
-
-  :found
-  REM Write IP to file
-  (
-    echo|set /p=!ip!
-  ) > C:\common\sandbox_ip_address.txt
-  call :log "IP Address is !ip!"
 
 exit /b
 

@@ -1,0 +1,37 @@
+[Sat 03/01/2025  8:58:36.08] Starting 
+[Sat 03/01/2025  8:58:36.14] SANDBOX_DIR=c:\sandbox 
+[Sat 03/01/2025  8:58:36.17] COMMON_DIR=c:\common 
+[Sat 03/01/2025  8:58:36.20] CONFIGS_DIR=c:\sandbox\configs 
+[Sat 03/01/2025  8:58:36.25] INSTALLERS_DIR=c:\sandbox\installers 
+[Sat 03/01/2025  8:58:36.28] CONFIG_FILE=c:\sandbox\configs\sandbox.properties 
+[Sat 03/01/2025  8:58:36.33] LOGFILE=c:\sandbox\logs\sandbox.log 
+[Sat 03/01/2025  8:58:36.36] DEVDIR=C:\Development 
+[Sat 03/01/2025  8:58:36.41] PATH=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Users\WDAGUtilityAccount\AppData\Local\Microsoft\WindowsApps 
+[Sat 03/01/2025  8:58:36.52] Property: URL=http://mikejamesgreco.me 
+[Sat 03/01/2025  8:58:36.81] Property: SPORTS=Soccer,Tennis,Pickleball 
+[Sat 03/01/2025  8:58:36.98] List Property: SPORTS[1]=Soccer 
+[Sat 03/01/2025  8:58:37.01] List Property: SPORTS[2]=Tennis 
+[Sat 03/01/2025  8:58:37.05] List Property: SPORTS[3]=Pickleball 
+[Sat 03/01/2025  8:58:37.12] Calling install_winget.bat 
+[Sat 03/01/2025  8:59:45.87] Installing 7zip 
+[Sat 03/01/2025  8:59:54.47] Installing Eclipse Temurin JDK 17 with Hotspot 
+[Sat 03/01/2025  9:00:19.47] Searching for java.exe 
+[Sat 03/01/2025  9:00:23.55] JAVA_HOME is set to C:\Program Files\Eclipse Adoptium\jdk-17.0.14.7-hotspot 
+[Sat 03/01/2025  9:00:23.61] Installing Git 
+[Sat 03/01/2025  9:00:51.75] Installing Notepad++ 
+[Sat 03/01/2025  9:00:57.94] Installing Eclipse (jee-2024-12-R-win32-x86_64) 
+[Sat 03/01/2025  9:01:21.22] Installing Lombok 
+[Sat 03/01/2025  9:01:22.24] Installing ApacheDS (apacheds-2.0.0.AM27) 
+[Sat 03/01/2025  9:01:22.54] Installing Apache Directory Studio 
+[Sat 03/01/2025  9:01:36.06] Creating shortcut for 7zip 
+[Sat 03/01/2025  9:01:39.64] Creating shortcut for Git Bash 
+[Sat 03/01/2025  9:01:42.56] Creating shortcut for Notepad++ 
+[Sat 03/01/2025  9:01:45.36] Creating shortcut for Eclipse 
+[Sat 03/01/2025  9:01:48.41] Creating shortcut for ApacheDS start 
+[Sat 03/01/2025  9:01:51.33] Creating shortcut for ApacheDS stop 
+[Sat 03/01/2025  9:01:54.28] Creating shortcut for ApacheDS logs 
+[Sat 03/01/2025  9:01:57.29] Creating shortcut for Apache Directory Studio 
+[Sat 03/01/2025  9:02:00.45] PATH=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Users\WDAGUtilityAccount\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Eclipse Adoptium\jdk-17.0.14.7-hotspot\bin;C:\Program Files\7-Zip;C:\Program Files\Git\bin;C:\Program Files\Notepad++;C:\Development\eclipse-jee-2024-12-R-win32-x86_64\eclipse 
+[Sat 03/01/2025  9:02:00.57] Setting file extensions to be visible 
+[Sat 03/01/2025  9:02:00.72] Setting desktop icons to auto sort 
+[Sat 03/01/2025  9:02:01.27] Elapsed Time is 0:03:25.15 
