@@ -14,9 +14,10 @@ This repository contains various **Windows Sandbox configurations** (`.wsb` file
 | **`common/`**          | Not a sandbox but rather a common folder for shared utilities |
 | **`base/`**            | A minimal sandbox with winget, 7zip, jdk17 |
 | **`java-minimal/`**    | A minimal sandbox with winget, 7zip, jdk17, git, eclipse |
-| **`java-tomcat/`**    | A minimal sandbox with winget, 7zip, jdk17, git, eclipse, apache tomcat|
-| **`java-maven-ant-tomcat/`**    | A modest sandbox with winget, 7zip, jdk17, git, eclipse, apache tomcat, apache maven, apache ant|
-| **`javascript-angular-ionic/`**    | A modest sandbox with winget, 7zip, git, vs code, node, angular, ionic, vs code extensions|
+| **`java-apacheds/`**    | A minimal sandbox with winget, 7zip, jdk17, git, eclipse, apacheds, apache directory studio |
+| **`java-tomcat/`**    | A minimal sandbox with winget, 7zip, jdk17, git, eclipse, apache tomcat |
+| **`java-maven-ant-tomcat/`**    | A modest sandbox with winget, 7zip, jdk17, git, eclipse, apache tomcat, apache maven, apache ant |
+| **`javascript-angular-ionic/`**    | A modest sandbox with winget, 7zip, git, vs code, node, angular, ionic, vs code extensions |
 
 ## 🚀 Getting Started
 ### **Prerequisites**
