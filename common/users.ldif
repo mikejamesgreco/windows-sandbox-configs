@@ -1,0 +1,32 @@
+# Create user Mike Greco
+dn: uid=mike.greco,ou=users,dc=example,dc=com
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+cn: Mike Greco
+sn: Greco
+uid: mike.greco
+mail: mike.greco@example.com
+userPassword: {SSHA}8E81TtlRcrD3rfLJoLdGHFB3ATgP+eQA
+
+# Create user John Doe
+dn: uid=john.doe,ou=users,dc=example,dc=com
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+cn: John Doe
+sn: Doe
+uid: john.doe
+mail: john.doe@example.com
+userPassword: {SSHA}8E81TtlRcrD3rfLJoLdGHFB3ATgP+eQA
+
+# Create user Jane Smith
+dn: uid=jane.smith,ou=users,dc=example,dc=com
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+cn: Jane Smith
+sn: Smith
+uid: jane.smith
+mail: jane.smith@example.com
+userPassword: {SSHA}8E81TtlRcrD3rfLJoLdGHFB3ATgP+eQA

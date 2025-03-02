@@ -169,6 +169,15 @@ REM *********************************************
   winget install -e --id Apache.DirectoryStudio -h --scope machine --accept-source-agreements --silent > nul 2>&1
   if %errorlevel% neq 0 call :log "Apache Directory Studio installation failed with error code %errorlevel%"
 
+  REM Install Keycloak
+  call :log "Installing Keycloak (keycloak-26.1.3)"
+  copy "%COMMON_DIR%\keycloak-26.1.3.zip" %DEVDIR%
+  "C:\Program Files\7-Zip\7z.exe" x "%DEVDIR%\keycloak-26.1.3.zip" -o"%DEVDIR%\keycloak-26.1.3" -y > nul 2>&1
+  copy "%COMMON_DIR%\apacheds-keycloak-realm.json" %DEVDIR% > nul 2>&1
+  if %errorlevel% neq 0 call :log "Keycloak installation failed with error code %errorlevel%"
+
+  REM Desktop shortcuts
+
   REM Shortcut for 7-Zip
   call :log "Creating shortcut for 7zip"
   powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "7-Zip" -TargetPath "C:\Program Files\7-Zip\7zFM.exe"
@@ -201,19 +210,52 @@ REM *********************************************
   call :log "Creating shortcut for Apache Directory Studio"
   powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Apache Directory Studio" -TargetPath "C:\Program Files\Apache Directory Studio\ApacheDirectoryStudio.exe"
 
+  REM Shortcut for Keycloak Start
+  call :log "Creating shortcut for Keycloak Start"
+  powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Start Keycloak" -TargetPath "C:\Development\keycloak-26.1.3\keycloak-26.1.3\bin\kc.bat" -WorkingDirectory "C:\Development\keycloak-26.1.3\keycloak-26.1.3\bin" -Arguments "start-dev --import-realm=C:\Development\apacheds-keycloak-realm.json"
+
+  REM Shortcut for Keycloak Stop
+  call :log "Creating shortcut for Keycloak Stop"
+  powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Stop Keycloak" -TargetPath "C:\Windows\System32\taskkill.exe" -Arguments "/F /IM java.exe"
+
+  REM Shortcut for Keycloak Admin Panel
+  call :log "Creating shortcut for Keycloak Admin Panel"
+  powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Keycloak Admin Panel" -TargetPath "C:\Windows\System32\cmd.exe" -Arguments "/c start http://localhost:8080/admin"
+
   REM Default admin connection to ApacheDS can be imported with the following file:
   REM C:\Common\ApacheDS_Connection.lbc
   REM Host: localhost
   REM Port: 10389
   REM Bind DN or user: uid=admin,ou=system
   REM Bind password  : secret
-  
+
+  REM bootstramp keycloak with this command:
+  REM C:\Development\keycloak-26.1.3\keycloak-26.1.3\bin\kc.bat bootstrap-admin user --user admin --password admin
+  REM or set these to env vars
+  REM setx KC_BOOTSTRAP_ADMIN_USERNAME admin /m
+  REM setx KC_BOOTSTRAP_ADMIN_PASSWORD admin /m
+
+  REM Set keycloak admin user and password
+
+  call :log "Set keycloak admin password"
+  set KC_BOOTSTRAP_ADMIN_USERNAME=admin
+  set KC_BOOTSTRAP_ADMIN_PASSWORD=admin
+  setx KC_BOOTSTRAP_ADMIN_USERNAME "admin" /m
+  setx KC_BOOTSTRAP_ADMIN_PASSWORD "admin" /m
+
   REM Set PATH
 
   set "NEW_PATH=!PATH!;!JAVA_HOME!\bin;C:\Program Files\7-Zip;C:\Program Files\Git\bin;C:\Program Files\Notepad++;C:\Development\eclipse-jee-2024-12-R-win32-x86_64\eclipse"
   set PATH=!NEW_PATH!
   setx PATH "!NEW_PATH!" /m
   call :log "PATH=!PATH!"
+
+  REM Post steps
+  REM Start ApacheDS
+  REM Start Apache Directory Studio
+  REM Import ApacheDS_Connection.ldc connection info
+  REM Import ou-users.ldif and users.ldif into apacheds
+  REM Running keycloak startup shortcut will import realm json that points to apacheds (be sure to start apacheds first)
 
 exit /b
 

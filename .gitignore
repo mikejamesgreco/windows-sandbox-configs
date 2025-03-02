@@ -1,34 +1,14 @@
-# Ignore all files inside logs and data subfolders 
+# Ignore all files inside any logs/ and data/ subfolders, no matter the directory structure
+**/logs/*
+**/data/*
 
-base/logs/*
-java-minimal/logs/*
-java-tomcat/logs/*
-java-maven-ant-tomcat/logs/*
-javascript-angular-ionic/logs/*
+# Keep the .gitkeepifempty files inside logs/ and data/ folders
+!**/logs/.gitkeepifempty
+!**/data/.gitkeepifempty
 
-base/data/*
-java-minimal/data/*
-java-tomcat/data/*
-java-maven-ant-tomcat/data/*
-javascript-angular-ionic/data/*
-
-# Keep the .gitkeepifempty files
-
-!base/logs/.gitkeepifempty
-!java-minimal/logs/.gitkeepifempty
-!java-tomcat/logs/.gitkeepifempty
-!java-maven-ant-tomcat/logs/.gitkeepifempty
-!javascript-angular-ionic/logs/.gitkeepifempty
-
-!base/data/.gitkeepifempty
-!java-minimal/data/.gitkeepifempty
-!java-tomcat/data/.gitkeepifempty
-!java-maven-ant-tomcat/data/.gitkeepifempty
-!javascript-angular-ionic/data/.gitkeepifempty
-
-# Misc
-
+# Miscellaneous files
 common/proxy_info.txt
 common/*.html
 common/*.png
+common/*.log
 common/sandbox_ip_address.txt

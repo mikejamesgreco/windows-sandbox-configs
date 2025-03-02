@@ -1,0 +1,39 @@
+{
+  "id": "example-realm",
+  "realm": "example-realm",
+  "enabled": true,
+  "users": [],
+  "components": {
+    "org.keycloak.storage.UserStorageProvider": [
+      {
+        "id": "ldap-apacheds",
+        "name": "ApacheDS LDAP",
+        "providerId": "ldap",
+        "subComponents": {},
+        "config": {
+          "enabled": ["true"],
+          "priority": ["0"],
+          "editMode": ["READ_ONLY"],
+          "syncRegistrations": ["false"],
+          "vendor": ["other"],
+          "connectionUrl": ["ldap://localhost:10389"],
+          "bindDn": ["uid=admin,ou=system"],
+          "bindCredential": ["secret"],
+          "usersDn": ["ou=users,dc=example,dc=com"],
+          "userObjectClasses": ["inetOrgPerson"],
+          "usernameLDAPAttribute": ["uid"],
+          "rdnLDAPAttribute": ["uid"],
+          "uuidLDAPAttribute": ["entryUUID"],
+          "userLookupAttribute": ["uid"],
+          "importEnabled": ["true"],
+          "batchSizeForSync": ["1000"],
+          "fullSyncPeriod": ["-1"],
+          "changedSyncPeriod": ["-1"],
+          "trustEmail": ["false"],
+          "useTruststoreSpi": ["ldapsOnly"],
+          "pagination": ["true"]
+        }
+      }
+    ]
+  }
+}
