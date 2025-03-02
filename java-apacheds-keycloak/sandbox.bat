@@ -129,6 +129,11 @@ REM *********************************************
   winget install -e --id 7zip.7zip -h --accept-source-agreements --silent > nul 2>&1
   if %errorlevel% neq 0 call :log "7zip installation failed with error code %errorlevel%"
 
+  REM Install JQ using winget
+  call :log "Installing JQ"
+  winget install -e --id jqlang.jq -h --accept-source-agreements --silent > nul 2>&1
+  if %errorlevel% neq 0 call :log "JQ installation failed with error code %errorlevel%"
+
   REM Install Eclipse Temurin JDK 17 with Hotspot
   call :log "Installing Eclipse Temurin JDK 17 with Hotspot"
   winget install -e --id EclipseAdoptium.Temurin.17.JDK -h --scope machine --accept-source-agreements --silent > nul 2>&1
@@ -157,6 +162,17 @@ REM *********************************************
   if %errorlevel% neq 0 call :log "Lombok.jar download failed with error code %errorlevel%"
   echo -javaagent:%DEVDIR%\eclipse-jee-2024-12-R-win32-x86_64\eclipse\lombok.jar >> "%DEVDIR%\eclipse-jee-2024-12-R-win32-x86_64\eclipse\eclipse.ini"
 
+  REM Install Maven
+  call :log "Installing Maven (apache-maven-3.9.9-bin)"
+  copy "%COMMON_DIR%\apache-maven-3.9.9-bin.zip" %DEVDIR%
+  "C:\Program Files\7-Zip\7z.exe" x "%DEVDIR%\apache-maven-3.9.9-bin.zip" -o"%DEVDIR%" -y > nul 2>&1
+  if %errorlevel% neq 0 call :log "Maven installation failed with error code %errorlevel%"
+
+  REM Set MAVEN_HOME and update PATH
+  set MAVEN_HOME=%DEVDIR%\apache-maven-3.9.9
+  setx MAVEN_HOME %DEVDIR%\apache-maven-3.9.9 /m
+  call :log "MAVEN_HOME is set to %MAVEN_HOME%"
+  
   REM Install ApacheDS
   call :log "Installing ApacheDS (apacheds-2.0.0.AM27)"
   copy "%COMMON_DIR%\apacheds-2.0.0.AM27.zip" %DEVDIR%
@@ -256,7 +272,7 @@ REM *********************************************
   REM Import ApacheDS_Connection.ldc connection info
   REM Import ou-users.ldif and users.ldif into apacheds
   REM Running keycloak startup (be sure to start apacheds first)
-  REM Create a new realm by importing C:\Development\apacheds-keycloak-realm.json (this will write together ldap including ldap attr mapping)
+  REM Create a new realm by importing C:\Development\example-realm.json (this will wire together ldap including ldap attr mapping and set up a springboot-api example)
 
 exit /b
 
