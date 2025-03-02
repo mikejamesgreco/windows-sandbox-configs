@@ -212,7 +212,7 @@ REM *********************************************
 
   REM Shortcut for Keycloak Start
   call :log "Creating shortcut for Keycloak Start"
-  powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Start Keycloak" -TargetPath "C:\Development\keycloak-26.1.3\keycloak-26.1.3\bin\kc.bat" -WorkingDirectory "C:\Development\keycloak-26.1.3\keycloak-26.1.3\bin" -Arguments "start-dev --import-realm=C:\Development\apacheds-keycloak-realm.json"
+  powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Start Keycloak" -TargetPath "C:\Development\keycloak-26.1.3\keycloak-26.1.3\bin\kc.bat" -WorkingDirectory "C:\Development\keycloak-26.1.3\keycloak-26.1.3\bin" -Arguments "start-dev"
 
   REM Shortcut for Keycloak Stop
   call :log "Creating shortcut for Keycloak Stop"
@@ -255,7 +255,8 @@ REM *********************************************
   REM Start Apache Directory Studio
   REM Import ApacheDS_Connection.ldc connection info
   REM Import ou-users.ldif and users.ldif into apacheds
-  REM Running keycloak startup shortcut will import realm json that points to apacheds (be sure to start apacheds first)
+  REM Running keycloak startup (be sure to start apacheds first)
+  REM Create a new realm by importing C:\Development\apacheds-keycloak-realm.json (this will write together ldap including ldap attr mapping)
 
 exit /b
 
