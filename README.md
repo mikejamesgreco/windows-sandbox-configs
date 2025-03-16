@@ -20,6 +20,7 @@ This repository contains various **Windows Sandbox configurations** (`.wsb` file
 | **`java-maven-ant-tomcat/`**    | A modest sandbox with winget, 7zip, jdk17, git, eclipse, apache tomcat, apache maven, apache ant |
 | **`java-maven-ant-tomcat-postgresql/`**    | A modest sandbox with winget, 7zip, jdk17, git, eclipse, apache tomcat, apache maven, apache ant, postgresql |
 | **`javascript-angular-ionic/`**    | A modest sandbox with winget, 7zip, git, vs code, node, angular, ionic, vs code extensions |
+| **`java-owasp-zap/`**    | A modest sandbox with winget, 7zip, jdk17, git, eclipse, apache maven, apache ant, zed attack proxy (zap) |
 
 ## 🚀 Getting Started
 ### **Prerequisites**
