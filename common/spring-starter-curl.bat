@@ -1,0 +1,1 @@
+curl -o demo.zip "https://start.spring.io/starter.zip?type=maven-project&language=java&bootVersion=3.4.2&groupId=com.example&artifactId=demo&name=demo&packageName=com.example.demo&javaVersion=17&dependencies=web”
