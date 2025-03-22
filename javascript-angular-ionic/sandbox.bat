@@ -212,8 +212,8 @@ REM *********************************************
   call :log "Installing Ionic Extension Pack..."
   call %CODE_CMD% --install-extension jgw9617.ionic-extension-pack > nul 2>&1
 
-  call :log "Installing TypeScript Hero..."
-  call %CODE_CMD% --install-extension rbbit.typescript-hero > nul 2>&1
+  call :log "Installing Angular Snippets by Mikael... "
+  call %CODE_CMD% --install-extension mikael.angular-beastcode > nul 2>&1
 
   call :log "Installing ESLint..."
   call %CODE_CMD% --install-extension dbaeumer.vscode-eslint > nul 2>&1
@@ -239,10 +239,28 @@ REM *********************************************
 
   REM Set PATH
 
-  set "NEW_PATH=!PATH!;C:\Program Files\7-Zip;C:\Program Files\Git\bin;C:\Program Files\Notepad++;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\nodejs"
+  set "NEW_PATH=!PATH!;C:\Program Files\7-Zip;C:\Program Files\Git\bin;C:\Program Files\Notepad++;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\nodejs;C:\Users\WDAGUtilityAccount\AppData\Roaming\npm"
   set PATH=!NEW_PATH!
   setx PATH "!NEW_PATH!" /m
   call :log "PATH=!PATH!"
+
+  REM ng new options
+  REM --routing               Adds Angular routing module
+  REM --style=scss            Use SCSS for stylesheets
+  REM --skip-install=false    Installs dependencies automatically
+  REM --skip-git=false        Initializes a git repo
+  REM --strict                Enables strict type checking
+  REM --package-manager=npm   Explicitly use npm
+  REM --no-standalone         Use traditional NgModules (recommended for PrimeNG)
+  REM --no-ssr                Don’t enable Server-Side Rendering
+  REM --no-enable-analytics   Don’t send usage data to Angular team
+
+  REM create an empty angular project
+  call :log "Creating angular project"
+  REM Say no to sharing with Angular and Google teams
+  copy %CONFIGS_DIR%\.angular-config.json %USERPROFILE%
+  start "" cmd /k "cd /d %DEVDIR%\AngularProjects && ng new my-app --routing --style=scss --skip-install=false --skip-git=true --strict --package-manager=npm --no-standalone --no-ssr && timeout /t 2 /nobreak >nul && cd my-app && code . --disable-workspace-trust"
+  call :log "Angular project created"
 
 exit /b
 
