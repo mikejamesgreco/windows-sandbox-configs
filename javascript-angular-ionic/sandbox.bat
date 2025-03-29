@@ -170,6 +170,17 @@ REM *********************************************
   call "C:\Program Files\nodejs\npm.cmd" install -g eslint > nul 2>&1
   if %errorlevel% neq 0 call :log "ESLint installation failed with error code %errorlevel%"
 
+  REM Install Eclipse Temurin JDK 21 with Hotspot
+  call :log "Installing Eclipse Temurin JDK 21 with Hotspot"
+  winget install -e --id EclipseAdoptium.Temurin.21.JDK -h --scope machine --accept-source-agreements --silent > nul 2>&1
+  if %errorlevel% neq 0 call :log "JDK21 installation failed with error code %errorlevel%"
+  call :set_java_home
+
+  REM Install Android Studio
+  call :log "Installing Android Studio"
+  winget install -e --id=Google.AndroidStudio -h --scope machine --accept-source-agreements --silent > nul 2>&1
+  if %errorlevel% neq 0 call :log "Android Studio installation failed with error code %errorlevel%"
+
   REM Shortcut for 7-Zip
   call :log "Creating shortcut for 7zip"
   powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "7-Zip" -TargetPath "C:\Program Files\7-Zip\7zFM.exe"
@@ -202,6 +213,11 @@ REM *********************************************
   call :log "Creating shortcut for Ionic Project Folder"
   powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Ionic Projects" -TargetPath "%DEVDIR%\IonicProjects"
 
+  REM Shortcut for launching Android Studio
+  call :log "Creating shortcut for Android Studio"
+  powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Android Studio" -TargetPath "C:\Program Files\Android\Android Studio\bin\studio64.exe" -WorkingDirectory "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Android Studio"
+
+
   REM Set code command
   set CODE_CMD="C:\Program Files\Microsoft VS Code\bin\code.cmd"
 
@@ -211,6 +227,9 @@ REM *********************************************
 
   call :log "Installing Ionic Extension Pack..."
   call %CODE_CMD% --install-extension jgw9617.ionic-extension-pack > nul 2>&1
+
+  call :log "Installing Official Ionic Extension..."
+  call %CODE_CMD% --install-extension ionic.ionic > nul 2>&1
 
   call :log "Installing Angular Snippets by Mikael... "
   call %CODE_CMD% --install-extension mikael.angular-beastcode > nul 2>&1
@@ -239,7 +258,10 @@ REM *********************************************
 
   REM Set PATH
 
-  set "NEW_PATH=!PATH!;C:\Program Files\7-Zip;C:\Program Files\Git\bin;C:\Program Files\Notepad++;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\nodejs;C:\Users\WDAGUtilityAccount\AppData\Roaming\npm"
+  set ANDROID_HOME=%USERPROFILE%\AppData\Local\Android\Sdk
+  setx ANDROID_HOME "%ANDROID_HOME%" /m
+
+  set "NEW_PATH=!PATH!;!JAVA_HOME!\bin;C:\Program Files\7-Zip;C:\Program Files\Git\bin;C:\Program Files\Notepad++;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\nodejs;C:\Users\WDAGUtilityAccount\AppData\Roaming\npm;!ANDROID_HOME!\platform-tools;!ANDROID_HOME!\emulator"
   set PATH=!NEW_PATH!
   setx PATH "!NEW_PATH!" /m
   call :log "PATH=!PATH!"
@@ -253,14 +275,68 @@ REM *********************************************
   REM --package-manager=npm   Explicitly use npm
   REM --no-standalone         Use traditional NgModules (recommended for PrimeNG)
   REM --no-ssr                Don’t enable Server-Side Rendering
+  REM --ssr                   Enable Server-Side Rendering
   REM --no-enable-analytics   Don’t send usage data to Angular team
 
-  REM create an empty angular project
-  call :log "Creating angular project"
-  REM Say no to sharing with Angular and Google teams
+  REM Create an empty Angular + Express project
+  call :log "Creating Angular + Express project"
   copy %CONFIGS_DIR%\.angular-config.json %USERPROFILE%
-  start "" cmd /k "cd /d %DEVDIR%\AngularProjects && ng new my-app --routing --style=scss --skip-install=false --skip-git=true --strict --package-manager=npm --no-standalone --no-ssr && timeout /t 2 /nobreak >nul && cd my-app && code . --disable-workspace-trust"
-  call :log "Angular project created"
+  start "" cmd /k "cd /d %DEVDIR%\AngularProjects && ng new my-app --routing --style=scss --skip-install=false --skip-git=true --strict --package-manager=npm --no-standalone --no-ssr --no-interactive && timeout /t 2 /nobreak >nul && cd my-app && mkdir server && cd server && copy %COMMON_DIR%\index.js . >nul && npm init -y && npm install express && cd .. && code . --disable-workspace-trust"
+  call :log "Angular + Express project created"
+
+  REM Create one-liner build-and-serve.bat script
+  call :log "Creating build-and-serve.bat"
+  echo ng build --configuration production > "%DEVDIR%\AngularProjects\my-app\build-and-serve.bat"
+  echo node server\index.js >> "%DEVDIR%\AngularProjects\my-app\build-and-serve.bat"
+
+  REM ionic commands
+  REM Navigates to your dev folder
+  REM Creates a new Ionic Angular app without prompts
+  REM Waits briefly for stability
+  REM Enters the new project folder
+  REM Initializes Capacitor
+  REM Adds the Android platform
+  REM Opens the project in VS Code
+
+  REM Create an empty Ionic Angular project without prompts
+  call :log "Creating Ionic Angular project (no prompt)"
+  start "" cmd /k "cd /d %DEVDIR%\IonicProjects && ionic start my-ionic-app blank --type=angular --no-git --no-deps --no-interactive && timeout /t 2 /nobreak >nul && cd my-ionic-app && ionic cap init my.ionic.app MyIonicApp --web-dir=www --npm-client=npm && ionic cap add android && code . --disable-workspace-trust"
+  call :log "Ionic Angular project created"
+
+exit /b
+
+REM *********************************************
+REM
+REM set_java_home
+REM
+REM *********************************************
+
+:set_java_home
+
+  REM Define the search term and specific directories to search
+  set "search_term=java.exe"
+  set "found_path="
+  call :log "Searching for %search_term%"
+
+  for %%D in ("C:\Program Files" "C:\Program Files (x86)" "C:\ProgramData" "C:\Users\%USERNAME%\AppData\Local\Programs") do (
+      for /f "delims=" %%a in ('dir /s /b "%%~D\%search_term%" 2^>nul') do (
+          set "found_path=%%~dpa"
+          goto :FOUND_JAVA
+      ) 
+  )
+
+  :NOT_FOUND
+  call :log "%search_term% not found in likely directories"
+  exit /b 1
+
+  :FOUND_JAVA
+  REM Trim "\bin\" from the found path using PowerShell
+  for /f "delims=" %%A in ('powershell -NoProfile -Command "[regex]::Replace('%found_path%'.TrimEnd(), '\\bin[\\/]?\s*$', '')"') do set "found_path=%%A"
+
+  REM Set JAVA_HOME and update PATH
+  set JAVA_HOME=%found_path%
+  setx JAVA_HOME "%found_path%" /m
+  call :log "JAVA_HOME is set to %JAVA_HOME%"
 
 exit /b
 
