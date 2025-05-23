@@ -117,6 +117,9 @@ REM *********************************************
 
 :call_installers
 
+  REM Install Root Cert
+  certutil -addstore Root %SANDBOX_DIR%\data\ca-04-20-2036.crt > nul 2>&1
+  
   REM Install WinGet
   call :log "Calling install_winget.bat"
   start /min /wait cmd /c "%COMMON_DIR%\install_winget.bat %SANDBOX_DIR%\logs\install_winget.log >> %LOGFILE% 2>&1"
@@ -170,6 +173,11 @@ REM *********************************************
   call "C:\Program Files\nodejs\npm.cmd" install -g eslint > nul 2>&1
   if %errorlevel% neq 0 call :log "ESLint installation failed with error code %errorlevel%"
 
+  REM Install ESLint
+  call :log "Installing Json-Server 0.17.4 (Supports Routes)"
+  call "C:\Program Files\nodejs\npm.cmd" install -g json-server@v0.17.4 > nul 2>&1
+  if %errorlevel% neq 0 call :log "ESLint installation failed with error code %errorlevel%"
+
   REM Install Eclipse Temurin JDK 21 with Hotspot
   call :log "Installing Eclipse Temurin JDK 21 with Hotspot"
   winget install -e --id EclipseAdoptium.Temurin.21.JDK -h --scope machine --accept-source-agreements --silent > nul 2>&1
@@ -216,7 +224,6 @@ REM *********************************************
   REM Shortcut for launching Android Studio
   call :log "Creating shortcut for Android Studio"
   powershell -ExecutionPolicy Bypass -File "%COMMON_DIR%\create_desktop_shortcut.ps1" -ShortcutName "Android Studio" -TargetPath "C:\Program Files\Android\Android Studio\bin\studio64.exe" -WorkingDirectory "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Android Studio"
-
 
   REM Set code command
   set CODE_CMD="C:\Program Files\Microsoft VS Code\bin\code.cmd"
@@ -302,6 +309,19 @@ REM *********************************************
   call :log "Creating Ionic Angular project (no prompt)"
   start "" cmd /k "cd /d %DEVDIR%\IonicProjects && ionic start my-ionic-app blank --type=angular --no-git --no-deps --no-interactive && timeout /t 2 /nobreak >nul && cd my-ionic-app && ionic cap init my.ionic.app MyIonicApp --web-dir=www --npm-client=npm && ionic cap add android && code . --disable-workspace-trust"
   call :log "Ionic Angular project created"
+
+  @echo off
+  call :log "Enable powershell script execution for current user"
+  REM Enable PowerShell script execution for the current user
+  powershell -Command "Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned -Force" > nul 2>&1 
+
+  REM in command window
+  REM json-server --watch mock-db.json --routes routes.json --port 3000
+
+  REM vs code terminal
+  REM Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned -Force
+  REM npm install @angular-devkit/build-angular --save-dev --legacy-peer-deps
+  REM ionic serve --configuration=mock
 
 exit /b
 

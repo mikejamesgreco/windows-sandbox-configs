@@ -129,8 +129,8 @@ REM *********************************************
   if %errorlevel% neq 0 call :log "7zip installation failed with error code %errorlevel%"
 
   REM Install Eclipse Temurin JDK 17 with Hotspot
-  call :log "Installing Eclipse Temurin JDK 17 with Hotspot"
-  winget install -e --id EclipseAdoptium.Temurin.17.JDK -h --scope machine --accept-source-agreements --silent > nul 2>&1
+  call :log "Installing Eclipse Temurin JDK 21 with Hotspot"
+  winget install -e --id EclipseAdoptium.Temurin.21.JDK -h --scope machine --accept-source-agreements --silent > nul 2>&1
   if %errorlevel% neq 0 call :log "JDK17 installation failed with error code %errorlevel%"
   call :set_java_home
 
@@ -200,6 +200,17 @@ REM *********************************************
   REM Init PostgreSQL database
   call :log "Initializing PostgreSQL"
   "C:\Program Files\PostgreSQL\17\bin\initdb.exe" -D %PGDATA% -U postgres --auth=md5 --pwfile=%CONFIGS_DIR%\pgpass.txt
+
+  REM Install GraalVM
+  call :log "Installing GraalVM"
+  winget install --id=BellSoft.LibericaNIK.23.JDK21.Full --scope machine --accept-source-agreements --silent
+  if %errorlevel% neq 0 call :log "GraalVM installation failed with error code %errorlevel%"
+  
+  REM Install Visual Studio Buildtools
+  call :log "Installing Visual Studio Build Tools"
+  REM winget install --id=Microsoft.VisualStudio.2022.BuildTools --scope machine  --accept-source-agreements --silent 
+  REM winget install Microsoft.VisualStudio.2022.Community --silent --override "--wait --quiet --add ProductLang En-us --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended"
+  if %errorlevel% neq 0 call :log "Visual Studio Buildtools installation failed with error code %errorlevel%"
 
   REM Desktop shortcuts
 

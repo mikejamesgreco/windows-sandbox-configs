@@ -1,0 +1,1 @@
+keytool -importcert -trustcacerts -keystore "C:\Development\graalvm-jdk-21.0.6+8.1\lib\security\cacerts" -storepass changeit -noprompt -alias maven-central -file "C:\sandbox\data\repo.maven.apache.org.crt"

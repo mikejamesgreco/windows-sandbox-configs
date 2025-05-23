@@ -1,4 +1,5 @@
 <Configuration>
+  <MemoryInMB>8192</MemoryInMB>
   <MappedFolders>
     <MappedFolder>
       <HostFolder>C:\mikejamesgrecollc\git\windows-sandbox-configs\java-maven-ant-tomcat-postgresql</HostFolder>
